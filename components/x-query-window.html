@@ -1,0 +1,159 @@
+<element name="x-query-window" attributes="params" extends="x-window">
+	<template>
+		<style>
+		  table {
+			width:100%;
+			padding:0px;
+			margin:0px;
+		  }
+		  tr{
+			margin:0px;
+			padding:0px;
+
+		  }
+		   th {
+			font-weigth: bold;
+			background-color: #a1a1a1;
+			border-bottom: 1px solid #a1a1a1;
+			text-transform:uppercase;
+		  }
+		  td{
+			margin:0px;
+			padding:0px;
+			border-bottom: 1px solid #e1e1e1;
+		  }
+		  .selected {
+			color:red;
+		  }
+		</style>
+		<!--
+		<x-window title="Seleziona un elemento..." tabindex="0"></x-window>
+		-->
+		<x-window title="Seleziona un elemento..."></x-window>
+
+	</template>
+	<script>
+	Polymer.register(this,{
+	
+	ready: function (){
+		//creo i parametri della query da una stringa json
+		if(this.params){
+			this.params = this.params.replace("'/g", '"');
+		}
+		
+		//ricavo i dati con cui riempire la finestra
+		this.getFromServer();
+		
+		//do il focus alla mia finestra
+		$(this.webkitShadowRoot.querySelector('x-window')).focus();
+
+		//manage keyboard events
+		$(this).keydown(function(event) {
+			switch (event.which){
+				case 38: this.table.prev();	break; //up
+				case 40: this.table.next();	break; //down
+				case 13: this.confirm(); break; //enter
+				case 27: this.cancel(); break; //esc
+			}
+		});
+	},
+	
+	getFromServer : function (){
+		/*perform an ajax request to get the list to display*/
+		$.ajax({
+			type: "POST",
+			url: "./../webContab/my/php/do.php",
+			data: { action: 'getAll',
+					params: $.parseJSON(this.params)
+			},
+			context: this,
+		}).done(function( msg ) {
+			if (msg){
+				var jsonList = $.parseJSON(msg);
+				this.jsonToTable(jsonList);
+			}
+		});
+	},
+	
+	jsonToTable : function (list){
+		for (var i=0; i < list.length; i++){
+			//creo le colonne
+			if(i==0){
+				var table = document.createElement('table');
+				var row = document.createElement('tr');
+				table.appendChild(row);
+				
+				//creo una intestazione per ogni proprieta dell'oggetto /*todo nascondi propietà nascoste (quelle che iniziano con "_" )*/
+				for (prop in list[i]){
+					row.innerHTML+='<th>'+prop+'</th>';
+				}
+				//mi ricordo la lista degli oggetto
+				table.list = list;
+			}
+			//creo le righe
+			this.webkitShadowRoot.querySelector('x-window').appendChild(table)
+			
+			//creo una nuova riga
+			var MyRow = document.createElement('tr');
+			MyRow.id='r'+i;
+			table.appendChild(MyRow);
+			
+			//con tutti i campi
+			for (prop in list[i]){
+				MyRow.innerHTML+='<td>'+list[i][prop]+'</td>';
+			}
+		}
+		
+		//seleziona una riga della tabella
+		table.select = function (id){
+			//deseleziona vecchio elemento
+			if (this.selected != null){
+				this.querySelector('#r'+this.selected).classList.toggle('selected');			
+			}
+			
+			//seleziona il nuovo elemento
+			this.querySelector('#r'+id).classList.toggle('selected');
+			this.selected = id;
+		};
+		table.prev = function (){
+			if (this.selected > 0){
+				this.select ( this.selected-1);
+			}
+		};
+		table.next = function (){
+			if (this.selected < (this.length()-1)){
+				this.select ( this.selected+1);
+			}
+		};
+		table.first = function (){
+			table.select(0);
+		};
+		table.last = function (){
+			table.select(this.length());
+		};		
+		table.length = function (){
+			return this.querySelectorAll('tr').length-1;
+		};
+		table.getSelection = function (){
+			//return the currentli selected object
+			return this.list[this.selected];
+		}
+		//di default seleziono la prima riga /*todo*/ bisognerebbe selezionare l'elemento corrente
+		table.select(0);
+
+		this.table = table;
+	},
+	
+	confirm : function (){
+		//remove me from the dom
+		this.parentNode.removeChild(this);
+		//and return the value
+		return this.table.getSelection();
+	},
+	cancel : function (){
+		//remove me from the dom without returning any value
+		this.parentNode.removeChild(this);
+	}	
+});
+	</script>
+</element>

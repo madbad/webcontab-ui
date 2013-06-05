@@ -1,0 +1,25 @@
+<element name="x-menu">
+	<template>
+		<style>
+		  .menu {
+			box-shadow: 3px 3px 5px 1px #ccc;
+			border: 1px solid #a1a1a1;
+			color: #000000;
+			display: inline-block;
+			min-width:15em;
+			position:relative;
+			bottom: 2em;
+			right: 2em;
+			background-color:white;
+		  }
+		</style>
+		<div class="menu">
+			<content></content>
+		</div>
+	</template>
+	<script>
+	Polymer.register(this, {
+		value: '',
+	});
+	</script>
+</element>

@@ -1,0 +1,17 @@
+<element name="x-articolodescrizione" attributes="value lenght">
+	<template>
+		<label>
+			Descr.
+			<input class="input" type="text" value="{{value}}"  maxlength="{{lenght}}" size="{{lenght}}" style="width:{{lenght}}em">
+		</label>
+	</template>
+	<script>
+	Polymer.register(this, {
+		value: '',
+		lenght: 15,
+		focus: function (){
+			this.webkitShadowRoot.querySelector('input').focus();
+		}
+	});
+	</script>
+</element>

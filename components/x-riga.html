@@ -1,0 +1,87 @@
+<element name="x-riga" attributes="value">
+    <style>
+		@host{
+			* {
+				text-align: right;
+			}
+		}
+    </style>
+	<template>
+		<div class="riga">
+			<x-numero interi="4" label="N."></x-numero>
+			
+			<x-articolo></x-articolo>
+
+			<x-um></x-um>
+			<x-pesolordo></x-pesolordo>
+			<x-tara></x-tara>
+			<x-pesonetto></x-pesonetto>
+			<br>
+			<x-prezzo></x-prezzo>
+			<x-articoloiva></x-articoloiva>
+			<x-colli></x-colli>
+			<x-imballaggio></x-imballaggio>
+			<x-lotto></x-lotto>
+			<hr>
+		</div>
+	</template>
+	<script>
+	Polymer.register(this, {
+		value: '',
+		ready: function (){
+			this._type = {value:''};
+			this.cod_articolo= this.webkitShadowRoot.querySelector('x-articolo').webkitShadowRoot.querySelector('x-articolocodice');
+			this.colli= this.webkitShadowRoot.querySelector('x-colli');
+			this.descrizione= this.webkitShadowRoot.querySelector('x-articolo').webkitShadowRoot.querySelector('x-articolodescrizione');
+			this.numero= this.webkitShadowRoot.querySelector('x-numero'); 
+			this.peso_lordo= this.webkitShadowRoot.querySelector('x-pesolordo').webkitShadowRoot.querySelector('x-numero');
+			this.peso_netto= this.webkitShadowRoot.querySelector('x-pesonetto').webkitShadowRoot.querySelector('x-numero');
+			this.prezzo= this.webkitShadowRoot.querySelector('x-prezzo');
+			this.unita_misura= this.webkitShadowRoot.querySelector('x-um');
+			this.cod_iva =  this.webkitShadowRoot.querySelector('x-articoloiva');
+			
+			//manage keyboard events
+			$(this).keydown(function(event) {
+				switch (event.which){
+					case 13:
+						return this.focusNext();
+					default: console.log(event.which);
+				}
+			});
+			
+			/*focus management*/
+			this.focusAbleContainer = this.webkitShadowRoot.querySelector('div');
+		},
+		valueChanged: function (){
+			//console.log(this.nodeName+' changed');
+			//console.log(this.value);
+			this.creaRiga(this.value);
+		},
+		creaRiga: function (riga){
+			//console.log('doing some nice stuff hire');
+			//console.log(righe.lenght);
+		
+			for (var prop in riga){
+				//console.log(prop);
+
+				if (!prop.search('cod_') && typeof riga[prop] == 'object'){
+					if (this.hasOwnProperty(prop)){
+						this[prop].value = riga[prop].codice;
+					}
+				}else{
+					if (this.hasOwnProperty(prop)){					
+						this[prop].value = riga[prop];
+					}
+				}
+			}
+		},
+		/*focus management*/
+		focusedID: -1,
+		focus: focus,
+		focusNext: focusNext,
+		getFocusAble : getFocusAble,
+	});
+	</script>
+</element>
+
+

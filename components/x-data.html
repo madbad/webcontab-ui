@@ -1,0 +1,18 @@
+<element name="x-data" attributes="value">
+	<template>
+		<label>
+			Data
+			<input type="text" value="{{value}}"  maxlength="10" size="10">
+		</label>
+	</template>
+	<script>
+	Polymer.register(this, {
+		value: new Date().toJSON().slice(0,10),
+		focus: function (){
+			this.webkitShadowRoot.querySelector('input').focus();
+		}
+	});
+	</script>
+</element>
+
+

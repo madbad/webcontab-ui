@@ -1,0 +1,16 @@
+<element name="x-imballaggiodescrizione" attributes="value">
+	<template>
+		<label>
+			Descr.
+			<input type="text" value="{{value}}"  maxlength="5" size="5">
+		</label>
+	</template>
+	<script>
+	Polymer.register(this, {
+		value: '',
+		focus: function (){
+			this.webkitShadowRoot.querySelector('input').focus();
+		}
+	});
+	</script>
+</element>

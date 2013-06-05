@@ -1,0 +1,18 @@
+<element name="x-articoloiva" attributes="value">
+	<template>
+		<label>
+			Art.Iva
+			<input type="text" value="{{value}}" maxlength="3" size="3">
+		</label>
+	</template>
+	<script>
+	Polymer.register(this, {
+		value: '',
+		focus: function (){
+			this.webkitShadowRoot.querySelector('input').focus();
+		}
+	});
+	</script>
+</element>
+
+

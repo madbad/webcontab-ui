@@ -1,0 +1,13 @@
+<element name="x-fornitore-codice" attributes="value">
+	<template>
+		<input type="text" value="{{value}}"  maxlength="5" size="5">
+	</template>
+	<script>
+	Polymer.register(this, {
+		value: '',
+		focus: function (){
+			this.webkitShadowRoot.querySelector('input').focus();
+		}
+	});
+	</script>
+</element>

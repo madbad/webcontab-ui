@@ -1,0 +1,142 @@
+<element name="x-gestioneddt">
+	<template>
+		<x-window title="Gestione Ddt">
+				<x-ddtselezione></x-ddtselezione>
+				<hr>
+				<x-tabs>
+						<x-pannel title="Testata">
+							<br><x-spedizione></x-spedizione>
+							<br><x-vettore></x-vettore>			   
+						</x-pannel>
+						<x-pannel title="Dettaglio">
+							<x-righe>ppppp</x-righe>
+							<hr>
+							<x-riga>sadasd</x-riga>
+						</x-pannel>
+						<x-pannel title="Stampa">
+							- Stampiamo il documento
+							- Note
+						</x-pannel>
+				</x-tabs>
+<!--
+				<x-app>
+					<span>test</span>
+					<span>test2</span>
+					<span>test3</span>
+				</x-app>
+-->
+<!--
+<x-menu>
+	<x-menuitem action="doStuff">Testata</x-menuitem>
+	<x-menuitem action="doStuff">Dettaglio</x-menuitem>
+	<x-menuitem action="doStuff">Varie</x-menuitem>
+	<x-menuitem action="">---</x-menuitem>
+	<x-menuitem action="doStuff">Stampa</x-menuitem>
+	<x-menuitem action="doStuff">Memorizza</x-menuitem>
+	<x-menuitem action="doStuff">Abbandona</x-menuitem>
+	<x-menuitem action="doStuff">Do something</x-menuitem>
+</x-menu>
+-->
+		</x-window>	
+	</template>
+	<script>
+	Polymer.register(this,{
+	get : function (){
+		/*perform an ajax request to get the ddt*/
+		$.ajax({
+			type: "POST",
+			url: "./../webContab/my/php/do.php",
+			data: { action: 'getOne',
+					params: {
+								_type: 'Ddt',
+								numero: '2886',
+								data: '22/09/2012'
+								//_autoExtend: -2,
+					},
+			},
+			context: this,
+		}).done(function( msg ) {
+			var ddt = $.parseJSON(msg).ddt;
+
+			//console.log(ddt);
+			for (var prop in ddt){
+				//console.log(prop);
+				if (!prop.search('cod_') && typeof ddt[prop] == 'object'){
+				//console.log('code');
+					this[prop].value = ddt[prop].codice;
+				}else{
+					this[prop].value = ddt[prop];
+				}
+				
+				//call the onchange method because it is not fired when we modify the value from here
+				if(typeof this[prop].onchange == 'function') {
+					this[prop].onchange();
+				}
+				
+			}
+			//console.log(this);
+		//console.log(this.nodeName+' <> '+this.value);	
+		});
+
+	},
+	ready: function (){
+		myddt = this;
+	//console.log(this);
+		/*map some property to the html elements*/
+		this._type = {value:''};
+		this.cod_mezzo = this.webkitShadowRoot.querySelector('x-spedizione').codice;
+		this.cod_vettore = this.webkitShadowRoot.querySelector('x-vettore').codice;
+		
+		this.cod_destinatario = this.webkitShadowRoot.querySelector('x-ddtselezione').webkitShadowRoot.querySelector('x-fornitore').codice;
+		this.cod_destinazione = {value:''};
+		this.data =   this.webkitShadowRoot.querySelector('x-ddtselezione').webkitShadowRoot.querySelector('x-data');
+		this.numero =  this.webkitShadowRoot.querySelector('x-ddtselezione').webkitShadowRoot.querySelector('x-numero');
+		this.cod_causale =  this.webkitShadowRoot.querySelector('x-ddtselezione').webkitShadowRoot.querySelector('x-causale');
+		this.fattura_data = {value:''};
+		this.fattura_numero = {value:''};
+
+		this.righe = this.webkitShadowRoot.querySelector('x-tabs').querySelector('x-righe');
+		this.tot_colli = {value:''};
+		this.tot_peso = {value:''};
+		this.valuta = {value:''};
+		this.cod_banca = {value:''};
+		this.cod_pagamento = {value:''};
+		this.note = {value:''};
+		this.note1 = {value:''};
+		this.note2 = {value:''};
+		this.peso_lordo = {value:''};
+		this.peso_netto = {value:''};
+		this.stato = {value:''};
+		this.fatturabile = {value:''};
+		this.tipocodiceclientefornitore = {value:''};
+		
+		
+		this.get();
+		
+		//manage keyboard events
+		$(this).keydown(function(event) {
+			switch (event.which){
+				case 112: 
+					console.log(event.which);
+					this.webkitShadowRoot.innerHTML +='<x-query-window params=\'{"_type":"causalispedizione","codice":["!=",""]}\'><x-query-window>';
+					event.preventDefault();
+					event.stopPropagation();					
+					break;
+				case 13:
+						return this.focusNext();
+				default: console.log(event.which);
+			}
+		});
+		/*focus management*/
+		this.focusAbleContainer = this.webkitShadowRoot.querySelector('x-window');
+		
+		this.focus();
+	},
+		/*focus management*/
+		focusedID: -1,
+		focus: focus,
+		focusNext: focusNext,
+		getFocusAble : getFocusAble,
+	});	
+	</script>
+</element>

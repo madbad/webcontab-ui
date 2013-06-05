@@ -1,0 +1,30 @@
+<element name="x-pannel" attributes="title">
+	<template>
+		<content></content>
+	</template>
+  <script>
+    Polymer.register(this, {
+		uiOnly: true,
+		ready: function() {
+
+			//manage keyboard events
+			$(this).keydown(function(event) {
+				switch (event.which){
+						case 13:
+							return this.focusNext();
+					default: console.log(event.which);
+				}
+			});
+
+			/*focus management*/
+			this.focusAbleContainer = this;	
+		},
+ 
+		/*focus management*/
+		focusedID: -1,
+		focus: focus,
+		focusNext: focusNext,
+		getFocusAble : getFocusAble,
+    });
+  </script>
+</element>

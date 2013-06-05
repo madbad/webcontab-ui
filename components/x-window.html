@@ -1,0 +1,45 @@
+<element name="x-window" attributes="title">
+	<template>
+		<style>
+		  .window {
+			box-shadow: 3px 3px 5px 1px #ccc;
+			border: 1px solid #a1a1a1;
+			position:relative;
+			background-color:white;
+			min-width:30%;
+			min-heigth:30%;
+			max-width:90%;
+			max-heigth:90%;
+
+position:fixed;			
+		  }
+		   .title {
+			font-weigth: bold;
+			background-color: #e1e1e1;
+			border-bottom: 1px solid #a1a1a1; 
+			padding: 0.3em;
+		  }
+		  .content{
+  			padding:1em;
+			color: #dbdbdb;
+		  }
+		</style>
+		<div class="window">
+			<div class="title">{{title}}</div>
+			<div class="content"><content></content></div>
+		</div>
+	</template>
+	<script>
+	Polymer.register(this, {
+		uiOnly: true,
+		title: '',
+		close: function (){},
+		hide: function () {},
+		minimize: function (){},
+		ready : function (){
+			this.tabIndex = 0;
+		},
+
+	});
+	</script>
+</element>

@@ -1,0 +1,13 @@
+<element name="x-fornitore-ragionesociale">
+	<template>
+		<input type="text" value="{{value}}" maxlength="40" size="40">
+	</template>
+	<script>
+	Polymer.register(this, {
+		value: '',
+		focus: function (){
+			this.webkitShadowRoot.querySelector('input').focus();
+		}
+	});
+	</script>
+</element>

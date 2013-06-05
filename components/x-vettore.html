@@ -1,0 +1,56 @@
+<element name="x-vettore" attributes="value">
+	<template>
+		<x-vettorecodice value="{{value}}"></x-vettorecodice>
+		<x-vettoreragionesociale></x-vettoreragionesociale>		
+	</template>
+	<script>
+	Polymer.register(this, {
+		_type: 'vettore',
+		value: '',
+		ready: function (){
+
+			this.codice = this.webkitShadowRoot.querySelector('x-vettorecodice').webkitShadowRoot.querySelector('input');
+			this.ragionesociale =  this.webkitShadowRoot.querySelector('x-vettoreragionesociale').webkitShadowRoot.querySelector('input');
+
+			// when the "codice input" change call my "oncodechange" method
+			// faccio questo passamano 
+			//perchè se operassi direttamente nel metodo onchange dell'input 
+			//perdo i riferimenti ad alcune proprietà di x-fornitore che mi servono
+			this.codice.onchange = function (){
+				console.log('the input has changed');		
+				//call the x-fornitore oncodechange function  
+				this.oncodechange();
+			}.bind(this);
+			
+			
+			this.oncodechange = function (){
+				//il codice fornitore è cambiato
+				//chiedo al server di mandarmi i nuovi dati
+				$.ajax({
+					type: "POST",
+					url: "./../webContab/my/php/do.php",
+					data: { action: 'getOne',
+							params: {
+										_type: this._type,
+										codice: this.codice.value,
+							},
+					},
+					context: this,
+				}).done(function( msg ) {
+					var json = $.parseJSON(msg)[this['_type']];
+					if (json.ragionesociale){
+						this.ragionesociale.value = json.ragionesociale;
+					}else{
+						console.log('Non trovato: '+this._type+' = '+this.value);
+					}
+				});				
+			}
+		},
+		focus: function (){
+			this.webkitShadowRoot.querySelector('x-vettorecodice').focus();
+		}
+	});
+	</script>
+</element>
+
+

@@ -1,0 +1,18 @@
+<element name="x-lotto" attributes="value">
+	<template>
+		<label>
+			Lotto
+			<input type="text" value="{{value}}">
+		</label>
+	</template>
+	<script>
+	Polymer.register(this, {
+		value: '',
+		focus: function (){
+			this.webkitShadowRoot.querySelector('input').focus();
+		}
+	});
+	</script>
+</element>
+
+

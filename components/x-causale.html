@@ -1,0 +1,16 @@
+<element name="x-causale" attributes="value">
+	<template>
+		<label>
+			Causale
+			<input type="text" value="{{value}}"  maxlength="2" size="2">
+		</label>
+	</template>
+	<script>
+	Polymer.register(this, {
+		value: '',
+		focus: function (){
+			this.webkitShadowRoot.querySelector('input').focus();
+		}
+	});
+	</script>
+</element>

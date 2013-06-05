@@ -1,0 +1,18 @@
+<element name="x-colli" attributes="value">
+	<template>
+		<label>
+			Colli
+			<input type="text" value="{{value}}" maxlength="5" size="5">
+		</label>
+	</template>
+	<script>
+	Polymer.register(this, {
+		value: '',
+		focus: function (){
+			this.webkitShadowRoot.querySelector('input').focus();
+		}		
+	});
+	</script>
+</element>
+
+

@@ -1,0 +1,15 @@
+<element name="x-articolo">
+	<template>
+		<x-articolocodice></x-articolocodice>
+		<x-articolodescrizione></x-articolodescrizione>
+	</template>
+	<script>
+	Polymer.register(this, {
+		focus: function (){
+			this.webkitShadowRoot.querySelector('x-articolocodice').focus();
+		}
+	});
+	</script>
+</element>
+
+

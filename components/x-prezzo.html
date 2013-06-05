@@ -1,0 +1,18 @@
+<element name="x-prezzo" attributes="value">
+	<template>
+		<label>
+			Prezzo
+			<input type="text" value="{{value}}" maxlength="10" size="10">
+		</label>
+	</template>
+	<script>
+	Polymer.register(this, {
+		value: '',
+		focus: function (){
+			this.webkitShadowRoot.querySelector('input').focus();
+		}
+	});
+	</script>
+</element>
+
+

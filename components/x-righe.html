@@ -1,0 +1,25 @@
+<element name="x-righe" attributes="value">
+	<template>
+		<!--<x-riga></x-riga>-->
+	</template>
+	<script>
+	Polymer.register(this, {
+		value: '',
+		valueChanged: function (){
+			//console.log(this.nodeName+' changed');
+			//console.log(this.value);
+			this.creaRighe(this.value);
+		},
+		creaRighe: function (righe){
+			for (var i =0; i < righe.length; i++){
+				var riga = righe[i];
+				var newRiga = document.createElement('x-riga');
+				this.webkitShadowRoot.appendChild(newRiga);
+				newRiga.value = riga;
+			}
+		}
+	});
+	</script>
+</element>
+
+

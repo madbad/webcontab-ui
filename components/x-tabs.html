@@ -1,0 +1,140 @@
+<!--
+Copyright 2013 The Toolkitchen Authors. All rights reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file.
+-->
+<!--
+/**
+ * @module Toolkit Elements
+ */
+/**
+ * g-tabs is a g-selector styled to look like a tab menu.
+ *
+ * Example:
+ *
+ *     <g-tabs selected="0">
+ *       <span>One</span>
+ *       <span>Two</span>
+ *       <span>Three</span>
+ *       <span>Four</span>
+ *     </g-tabs>
+ *
+ * @class g-tabs
+ * @extends g-selector
+ */
+-->
+<element name="x-tabs">
+  <template>
+    <style>
+      .tabs{
+        border: 0;
+        border-bottom: 1px solid #ccc;
+      }
+	  .tabs > div{
+        display: inline-block;
+        border: 1px solid #ccc;
+		padding-left:0.3em;
+		padding-right:0.3em;
+		border-top-left-radius: 0.4em;
+		border-top-right-radius: 0.4em;
+		background-color: #e1e1e1;
+		border-bottom:0px;
+	   }
+
+   .tabs > div:hover {
+        background-color: white;
+		border-color: #000000;
+      }
+   .tabs > .selected {
+        background-color: white;
+		color: #555;
+      }
+   .hidden {
+        width: 0px;
+		height: 0px;
+	visibility:hidden;
+	display:none;
+	overflow:hidden;
+}
+    </style>
+    <div class="tabs" id="tabs"></div>
+	<div class="tabscontent" id="tabscontent">
+		<content></content>
+	</div>
+
+	</template>
+  <script>
+    Polymer.register(this, {
+	  uiOnly: true,
+	  ready: function() {
+		//for each tab pannel
+		for (var tabid=0; tabid < this.children.length; tabid++){
+
+			//the title of the tabcontent
+			var id = this.children[tabid].title;
+			
+			//setup the tablabel
+			var newLabel = document.createElement('div');
+			newLabel.innerHTML = id; 
+			newLabel.title = id;
+			newLabel.onclick = this.select.bind(this);
+			
+			//add the tab label to the dom
+			this.$.tabs.appendChild(newLabel);
+			//console.log(this)
+			//console.log(this.$.tabs)
+
+			//on the start i show only the firs tab
+			if(tabid==0){
+				//this.children[tabid].hidden=false;
+				this.children[tabid].className='';
+				this.$.tabs.children[tabid].className='selected';
+			}else{
+				//this.children[tabid].hidden=true;
+				this.children[tabid].className='hidden';
+			}
+		}
+		
+		//manage keyboard events
+		$(this).keydown(function(event) {
+			switch (event.which){
+					case 13:
+						return this.focusNext();
+				default: console.log(event.which);
+			}
+		});
+		
+		/*focus management*/
+		console.log('===========listing==============');
+		this.focusAbleContainer = this;
+
+	  },
+	 
+      select: function (event){  
+		var tabTitle=event.target.title;
+		
+		//show the content
+		for (var tabid=0; tabid < this.children.length; tabid++){
+			var curTabPanel = this.children[tabid];
+			var curTabLabel = this.$.tabs.children[tabid];
+			
+			if(tabTitle == curTabPanel.title){
+				//curTabPanel.hidden = false;
+				curTabPanel.className= '';
+				curTabLabel.className='selected';
+			}else{
+				//curTabPanel.hidden = true;
+				curTabPanel.className= 'hidden';
+				curTabLabel.className='';				
+			}
+		}
+	  },
+	  
+		/*focus management*/
+		focusedID: -1,
+		focus: focus,
+		focusNext: focusNext,
+		getFocusAble : getFocusAble,
+    });
+  </script>
+</element>

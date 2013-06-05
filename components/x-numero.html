@@ -1,0 +1,28 @@
+<element name="x-numero" attributes="decimali interi totalecaratteri label value">
+	<template>
+	<label>
+		{{label}}
+		<input type="text" value="{{value}}" maxlength="{{totalecaratteri}}" size="{{totalecaratteri}}" style="width:{{totalecaratteri}}em">
+	</label>
+	</template>
+	<script>
+	Polymer.register(this, {
+		decimali: 0,
+		interi: 8,
+		totalecaratteri:0,
+		label:'',
+		//value:'',
+		ready: function (){
+			this.tabIndex = 0;
+			if(this.decimali>0){var virgola=1;}else{var virgola=0;}
+			this.totalecaratteri = this.interi+virgola+this.decimali;
+			
+		},
+		focus: function (){
+			this.webkitShadowRoot.querySelector('input').focus();
+		}
+	});
+	</script>
+</element>
+
+

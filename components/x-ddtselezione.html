@@ -1,0 +1,34 @@
+<element name="x-ddtselezione" attributes="numero data fornitore causale">
+	<template>
+		<x-numero label="Numero"></x-numero>
+		<x-data></x-data>
+		<br>
+		<x-fornitore></x-fornitore>		
+		<br>
+		<x-causale></x-causale>
+	</template>
+	<script>
+	Polymer.register(this,{
+		numeroChanged: function (){
+			console.log('numero changed');
+		},
+		ready: function () {
+			//manage keyboard events
+			$(this).keydown(function(event) {
+				switch (event.which){
+					case 13:
+						return this.focusNext();
+					default: console.log(event.which);
+				}
+			});
+			/*focus management*/
+			this.focusAbleContainer = this.webkitShadowRoot;
+		},
+		/*focus management*/
+		focusedID: -1,
+		focus: focus,
+		focusNext: focusNext,
+		getFocusAble : getFocusAble,
+	});
+	</script>
+</element>
