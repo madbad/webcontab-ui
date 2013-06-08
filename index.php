@@ -41,8 +41,9 @@
 			element = this.focusAbleContainer;
 			var childrens = filter(element.children);
 			return childrens;
-		}		
+		}
 	</script>
+
 	<?php
 		function loadComponentsFromDir ($dir){
 			// create a handler for the directory

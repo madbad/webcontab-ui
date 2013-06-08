@@ -87,11 +87,16 @@ license that can be found in the LICENSE file.
 			//on the start i show only the firs tab
 			if(tabid==0){
 				//this.children[tabid].hidden=false;
-				this.children[tabid].className='';
+				//this.children[tabid].className='';
+				this.children[tabid].show();								
+				//this.children[tabid].setAttribute("display", "none");				
 				this.$.tabs.children[tabid].className='selected';
 			}else{
 				//this.children[tabid].hidden=true;
-				this.children[tabid].className='hidden';
+				//this.children[tabid].className='hidden';
+				this.children[tabid].hide();								
+
+				//this.children[tabid].setAttribute("display", "none");				
 			}
 		}
 		
@@ -120,12 +125,17 @@ license that can be found in the LICENSE file.
 			
 			if(tabTitle == curTabPanel.title){
 				//curTabPanel.hidden = false;
-				curTabPanel.className= '';
+				//curTabPanel.className= '';
+				curTabPanel.show();
+				//curTabPanel.setAttribute("display", "initial");	
 				curTabLabel.className='selected';
 			}else{
 				//curTabPanel.hidden = true;
-				curTabPanel.className= 'hidden';
-				curTabLabel.className='';				
+				//curTabPanel.className= 'hidden';
+				curTabPanel.hide();
+				//curTabPanel.setAttribute("display", "none");	
+				curTabLabel.className='';
+				
 			}
 		}
 	  },
