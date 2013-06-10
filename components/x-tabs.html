@@ -26,11 +26,11 @@ license that can be found in the LICENSE file.
 <element name="x-tabs">
   <template>
     <style>
-      .tabs{
+      .labels{
         border: 0;
         border-bottom: 1px solid #ccc;
       }
-	  .tabs > div{
+	  .labels > div{
         display: inline-block;
         border: 1px solid #ccc;
 		padding-left:0.3em;
@@ -41,14 +41,15 @@ license that can be found in the LICENSE file.
 		border-bottom:0px;
 	   }
 
-   .tabs > div:hover {
+   .labels > div:hover {
         background-color: white;
 		border-color: #000000;
       }
-   .tabs > .selected {
+   .labels > .selected {
         background-color: white;
 		color: #555;
       }
+
    .hidden {
         width: 0px;
 		height: 0px;
@@ -56,9 +57,10 @@ license that can be found in the LICENSE file.
 	display:none;
 	overflow:hidden;
 }
+
     </style>
-    <div class="tabs" id="tabs"></div>
-	<div class="tabscontent" id="tabscontent">
+    <div class="labels" id="labels"></div>
+	<div class="pannels" id="pannels">
 		<content></content>
 	</div>
 
@@ -67,39 +69,40 @@ license that can be found in the LICENSE file.
     Polymer.register(this, {
 	  uiOnly: true,
 	  ready: function() {
+	  /*console.log(this.$.tabscontent);*/
+	 // console.log(this.children.length);
+	  
+		//dont' ask me why but if I do not put it into a settimeout block it says it has 0 childrens... that is not true
+		//even if i call it in 0 milliseconds seconds
+		setTimeout(function () {
+
 		//for each tab pannel
 		for (var tabid=0; tabid < this.children.length; tabid++){
+			console.log(tabid);
+				//the title of the tabcontent
+				var id = this.children[tabid].title;
+				
+				//setup the tablabel
+				var newLabel = document.createElement('div');
+				newLabel.innerHTML = id; 
+				newLabel.title = id;
+				newLabel.onclick = this.select.bind(this);
+				
+				//add the tab label to the dom
+				this.$.labels.appendChild(newLabel);
 
-			//the title of the tabcontent
-			var id = this.children[tabid].title;
-			
-			//setup the tablabel
-			var newLabel = document.createElement('div');
-			newLabel.innerHTML = id; 
-			newLabel.title = id;
-			newLabel.onclick = this.select.bind(this);
-			
-			//add the tab label to the dom
-			this.$.tabs.appendChild(newLabel);
-			//console.log(this)
-			//console.log(this.$.tabs)
-
-			//on the start i show only the firs tab
-			if(tabid==0){
-				//this.children[tabid].hidden=false;
-				//this.children[tabid].className='';
-				this.children[tabid].show();								
-				//this.children[tabid].setAttribute("display", "none");				
-				this.$.tabs.children[tabid].className='selected';
-			}else{
-				//this.children[tabid].hidden=true;
-				//this.children[tabid].className='hidden';
-				this.children[tabid].hide();								
-
-				//this.children[tabid].setAttribute("display", "none");				
+				//on the start i show only the firs tab
+				if(tabid==0){
+					this.children[tabid].show();								
+					this.$.labels.children[tabid].className='selected';
+				}else{
+					this.children[tabid].hide();
+					this.$.labels.children[tabid].className='';
+				}
 			}
-		}
+		}.bind(this), 5);
 		
+
 		//manage keyboard events
 		$(this).keydown(function(event) {
 			switch (event.which){
@@ -115,13 +118,13 @@ license that can be found in the LICENSE file.
 
 	  },
 	 
-      select: function (event){  
+      select: function (event){
 		var tabTitle=event.target.title;
 		
 		//show the content
 		for (var tabid=0; tabid < this.children.length; tabid++){
 			var curTabPanel = this.children[tabid];
-			var curTabLabel = this.$.tabs.children[tabid];
+			var curTabLabel = this.$.labels.children[tabid];
 			
 			if(tabTitle == curTabPanel.title){
 				//curTabPanel.hidden = false;

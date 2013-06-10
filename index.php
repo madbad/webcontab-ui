@@ -5,6 +5,8 @@
 	
 	<script src="polymer/polymer.js"></script>
 	<script>
+	document.addEventListener('focus',function(e){console.log(e)}, true);
+	
 		function filter (elementsArray){
 			var notAllowed = ["BR", "HR", "X-RIGHE"];
 			var filtered = [];
@@ -24,7 +26,7 @@
 			return filtered;
 		};
 		var focus= function (){
-			console.log('focusing from',this.nodeName, this)
+			console.log('focusing from',this.nodeName, this);
 			this.focusNext();
 		};
 		var focusNext= function () {

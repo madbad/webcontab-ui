@@ -1,5 +1,15 @@
 <element name="x-pannel" attributes="title">
 	<template>	
+    <style>
+   .hidden {
+        width: 0px;
+		height: 0px;
+		visibility:hidden;
+		display:none;
+		overflow:hidden;
+	}
+
+    </style>
 		<content></content>
 	</template>
   <script>
@@ -20,15 +30,10 @@
 			this.focusAbleContainer = this;	
 		},
 		hide: function (){
-			console.log('hiding', this);
-			this.setAttribute("display", "none");
-			this.setAttribute("overflow", "hidden");
-			this.setAttribute("width", "0px");
-			this.setAttribute("height", "0px");
+			this.hidden = true;
 		},
 		show: function (){
-			console.log('showing', this);
-			this.setAttribute("display", "initial");
+			this.hidden = false;
 		},
  
 		/*focus management*/
