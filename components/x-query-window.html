@@ -1,4 +1,4 @@
-<element name="x-query-window" attributes="params" extends="x-window">
+<element name="x-query-window" attributes="params" extends="x-window" jsonList="">
 	<template>
 		<style>
 		  table {
@@ -19,17 +19,15 @@
 		  }
 		  td{
 			margin:0px;
-			padding:0px;
+			padding-left:0.5em;
 			border-bottom: 1px solid #e1e1e1;
 		  }
 		  .selected {
-			color:red;
+			background-color:black;
 		  }
 		</style>
-		<!--
+		
 		<x-window title="Seleziona un elemento..." tabindex="0"></x-window>
-		-->
-		<x-window title="Seleziona un elemento..."></x-window>
 
 	</template>
 	<script>
@@ -39,11 +37,15 @@
 		//creo i parametri della query da una stringa json
 		if(this.params){
 			this.params = this.params.replace("'/g", '"');
+			//ricavo i dati con cui riempire la finestra
+			this.getFromServer();			
 		}
 		
-		//ricavo i dati con cui riempire la finestra
-		this.getFromServer();
-		
+		if(this.jsonList){
+			this.jsonList = $.parseJSON(this.jsonList)
+			this.jsonToTable(this.jsonList);
+		}
+
 		//do il focus alla mia finestra
 		$(this.webkitShadowRoot.querySelector('x-window')).focus();
 
@@ -55,7 +57,11 @@
 				case 13: this.confirm(); break; //enter
 				case 27: this.cancel(); break; //esc
 			}
+			//return false;
 		});
+		
+		//
+		console.log('IO SONO STATO CREATO DA ', this, this.host);
 	},
 	
 	getFromServer : function (){
@@ -145,6 +151,7 @@
 	},
 	
 	confirm : function (){
+		this.onconfirm(this.table.getSelection());
 		//remove me from the dom
 		this.parentNode.removeChild(this);
 		//and return the value
@@ -153,7 +160,13 @@
 	cancel : function (){
 		//remove me from the dom without returning any value
 		this.parentNode.removeChild(this);
-	}	
+	},
+	onConfirm: function (selection){/*use this as a callback*/
+	},
+	focus: function () {
+		//do il focus alla mia finestra
+		$(this.webkitShadowRoot.querySelector('x-window')).focus();	
+	}
 });
 	</script>
 </element>

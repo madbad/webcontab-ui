@@ -1,153 +1,141 @@
-<!--
-Copyright 2013 The Toolkitchen Authors. All rights reserved.
-Use of this source code is governed by a BSD-style
-license that can be found in the LICENSE file.
--->
-<!--
-/**
- * @module Toolkit Elements
- */
-/**
- * g-tabs is a g-selector styled to look like a tab menu.
- *
- * Example:
- *
- *     <g-tabs selected="0">
- *       <span>One</span>
- *       <span>Two</span>
- *       <span>Three</span>
- *       <span>Four</span>
- *     </g-tabs>
- *
- * @class g-tabs
- * @extends g-selector
- */
--->
 <element name="x-tabs">
-  <template>
-    <style>
-      .labels{
-        border: 0;
-        border-bottom: 1px solid #ccc;
-      }
-	  .labels > div{
-        display: inline-block;
-        border: 1px solid #ccc;
-		padding-left:0.3em;
-		padding-right:0.3em;
-		border-top-left-radius: 0.4em;
-		border-top-right-radius: 0.4em;
-		background-color: #e1e1e1;
-		border-bottom:0px;
-	   }
+	<template>
+		<style>
+		  .labels{
+			border: 0;
+			border-bottom: 1px solid #ccc;
+		  }
+		  .labels > div{
+			display: inline-block;
+			border: 1px solid #ccc;
+			padding-left:0.3em;
+			padding-right:0.3em;
+			border-top-left-radius: 0.4em;
+			border-top-right-radius: 0.4em;
+			background-color: #e1e1e1;
+			border-bottom:0px;
+		   }
 
-   .labels > div:hover {
-        background-color: white;
-		border-color: #000000;
-      }
-   .labels > .selected {
-        background-color: white;
-		color: #555;
-      }
+	   .labels > div:hover {
+			background-color: white;
+			border-color: #000000;
+		  }
+	   .labels > .selected {
+			background-color: white;
+			color: #555;
+		  }
 
-   .hidden {
-        width: 0px;
-		height: 0px;
-	visibility:hidden;
-	display:none;
-	overflow:hidden;
-}
-
-    </style>
-    <div class="labels" id="labels"></div>
-	<div class="pannels" id="pannels">
-		<content></content>
-	</div>
-
+	   .hidden {
+			width: 0px;
+			height: 0px;
+			visibility:hidden;
+			display:none;
+			overflow:hidden;
+		}
+		</style>
+		
+		<div class="labels" id="labels"></div>
+		<div class="pannels" id="pannels">
+			<content></content>
+		</div>
+		<!--
+		<div class="menu">
+			<x-menu>
+				<x-menuitem action="Select testata">Testata</x-menuitem>
+				<x-menuitem action="Select dettaglio">Dettagllio</x-menuitem>
+				<x-menuitem action="Select stampa">Stampa</x-menuitem>				
+			</x-menu>
+		</div>
+		-->
 	</template>
-  <script>
+	<script>
     Polymer.register(this, {
-	  uiOnly: true,
-	  ready: function() {
-	  /*console.log(this.$.tabscontent);*/
-	 // console.log(this.children.length);
+		uiOnly: true,
+		ready: function() {
 	  
-		//dont' ask me why but if I do not put it into a settimeout block it says it has 0 childrens... that is not true
-		//even if i call it in 0 milliseconds seconds
-		setTimeout(function () {
+			//dont' ask me why but if I do not put it into a settimeout block it says it has 0 childrens... that is not true
+			//even if i call it in 0 milliseconds seconds
+			setTimeout(function () {
 
-		//for each tab pannel
-		for (var tabid=0; tabid < this.children.length; tabid++){
-			console.log(tabid);
-				//the title of the tabcontent
-				var id = this.children[tabid].title;
-				
-				//setup the tablabel
-				var newLabel = document.createElement('div');
-				newLabel.innerHTML = id; 
-				newLabel.title = id;
-				newLabel.onclick = this.select.bind(this);
-				
-				//add the tab label to the dom
-				this.$.labels.appendChild(newLabel);
+				//for each tab pannel
+				for (var tabid=0; tabid < this.children.length; tabid++){
 
-				//on the start i show only the firs tab
-				if(tabid==0){
-					this.children[tabid].show();								
-					this.$.labels.children[tabid].className='selected';
+					//the title of the tabcontent
+					var id = this.children[tabid].title;
+					
+					//setup the tablabel
+					var newLabel = document.createElement('div');
+					newLabel.innerHTML = id; 
+					newLabel.title = id;
+					newLabel.onclick = this.select.bind(this);
+					
+					//add the tab label to the dom
+					this.$.labels.appendChild(newLabel);
+					
+					//each panel when lose the focus show a menu
+					this.children[tabid].onleaving = function (){
+						console.log('using bind on', this)
+						console.log('show the menu');
+						var menu = document.createElement('x-query-window');
+						menu.jsonList =$.parseJSON('[{"menu":"Testata"},{"menu":"Dettaglio"},{"menu":"Stampa"}]');
+						menu.jsonToTable(menu.jsonList);
+						menu.webkitShadowRoot.querySelector('x-window').setPosition(this.webkitShadowRoot.querySelector('#pannels'), 'TL', 'TL');
+						this.webkitShadowRoot.appendChild(menu);
+						menu.focus();
+						menu.onconfirm = function (selection){
+							console.log('confirming from',this);
+							this.selectByLabel(selection.menu);
+						}.bind(this);
+						
+						//do not leave the panel
+						return false;
+					}.bind(this)
+
+					//on the start i show only the firs tab
+					if(tabid==0){
+						this.children[tabid].show();								
+						this.$.labels.children[tabid].className='selected';
+					}else{
+						this.children[tabid].hide();
+						this.$.labels.children[tabid].className='';
+					}
+				}
+			}.bind(this), 5);
+			
+			/*focus management*/
+			this.focusAbleContainer = this;
+
+		},
+	 
+		select: function (event){
+			var tabTitle=event.target.title;
+			this.selectByLabel(tabTitle);
+		},
+		
+		selectByLabel:function  (label){
+			var tabTitle=label;
+			
+			//show the content
+			for (var tabid=0; tabid < this.children.length; tabid++){
+				var curTabPanel = this.children[tabid];
+				var curTabLabel = this.$.labels.children[tabid];
+				
+				if(tabTitle == curTabPanel.title){
+					curTabPanel.show();
+					curTabLabel.className='selected';
+					curTabPanel.focus();
 				}else{
-					this.children[tabid].hide();
-					this.$.labels.children[tabid].className='';
+					curTabPanel.hide();
+					curTabLabel.className='';	
 				}
 			}
-		}.bind(this), 5);
-		
-
-		//manage keyboard events
-		$(this).keydown(function(event) {
-			switch (event.which){
-					case 13:
-						return this.focusNext();
-				default: console.log(event.which);
-			}
-		});
-		
-		/*focus management*/
-		console.log('===========listing==============');
-		this.focusAbleContainer = this;
-
-	  },
-	 
-      select: function (event){
-		var tabTitle=event.target.title;
-		
-		//show the content
-		for (var tabid=0; tabid < this.children.length; tabid++){
-			var curTabPanel = this.children[tabid];
-			var curTabLabel = this.$.labels.children[tabid];
-			
-			if(tabTitle == curTabPanel.title){
-				//curTabPanel.hidden = false;
-				//curTabPanel.className= '';
-				curTabPanel.show();
-				//curTabPanel.setAttribute("display", "initial");	
-				curTabLabel.className='selected';
-			}else{
-				//curTabPanel.hidden = true;
-				//curTabPanel.className= 'hidden';
-				curTabPanel.hide();
-				//curTabPanel.setAttribute("display", "none");	
-				curTabLabel.className='';
-				
-			}
-		}
-	  },
+		},		
 	  
 		/*focus management*/
 		focusedID: -1,
-		focus: focus,
+		focus:focus,
 		focusNext: focusNext,
-		getFocusAble : getFocusAble,
+		getFocusAble: getFocusAble,
     });
-  </script>
+	</script>
 </element>

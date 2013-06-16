@@ -21,7 +21,9 @@
 			$(this).keydown(function(event) {
 				switch (event.which){
 						case 13:
-							return this.focusNext();
+							var test= this.focusNext();
+							console.log(test);
+							return test;
 					default: console.log(event.which);
 				}
 			});
@@ -34,6 +36,9 @@
 		},
 		show: function (){
 			this.hidden = false;
+		},
+		onleaving: function (){
+			console.log('leaving', this);
 		},
  
 		/*focus management*/

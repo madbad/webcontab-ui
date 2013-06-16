@@ -5,6 +5,9 @@
 	<script>
 	Polymer.register(this, {
 		value: '',
+		focus: function (){
+			this.webkitShadowRoot.querySelector('x-numero').focus();
+		}
 	});
 	</script>
 </element>

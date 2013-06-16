@@ -4,14 +4,17 @@
 		  .window {
 			box-shadow: 3px 3px 5px 1px #ccc;
 			border: 1px solid #a1a1a1;
-			position:relative;
+			/*position:relative;*/
+			position:fixed;
+			/*position:absolute;*/
 			background-color:white;
 			min-width:30%;
 			min-heigth:30%;
 			max-width:90%;
 			max-heigth:90%;
 
-position:fixed;			
+			z-index: 100;
+
 		  }
 		   .title {
 			font-weigth: bold;
@@ -38,6 +41,21 @@ position:fixed;
 		minimize: function (){},
 		ready : function (){
 			this.tabIndex = 0;
+			console.log('IO SONO STATO CREATO DA ', this, this.host);
+		},
+		setPosition: function (htmlElement, htmlElementPoint, myPoint){
+
+			target = htmlElement;
+			
+			console.log('target is', target);
+
+			this.webkitShadowRoot.querySelector('.window').style.left='110px';
+			this.webkitShadowRoot.querySelector('.window').style.top='110px';	
+			
+			setTimeout(getOffset, 0, target, function (position){
+				this.webkitShadowRoot.querySelector('.window').style.left=position.left+'px';
+				this.webkitShadowRoot.querySelector('.window').style.top=position.top+'px';
+			}.bind(this));
 		},
 
 	});
