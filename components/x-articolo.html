@@ -1,15 +1,15 @@
-<element name="x-articolo">
+<polymer-element name="x-articolo">
 	<template>
 		<x-articolocodice></x-articolocodice>
 		<x-articolodescrizione></x-articolodescrizione>
 	</template>
 	<script>
-	Polymer.register(this, {
+	Polymer('x-articolo', {
 		focus: function (){
 			this.webkitShadowRoot.querySelector('x-articolocodice').focus();
 		}
 	});
 	</script>
-</element>
+</polymer-element>
 
 
