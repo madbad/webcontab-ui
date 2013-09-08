@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
 	<script src="./jquery.min.js"></script>
 	
-	<script src="polymer/polymer.js"></script>
+ <script src="./polymer/polymer-v0.0.20130905.min.js" log=""></script>
 	<script>
-	document.addEventListener('focus',function(e){console.log(e)}, true);
+	//document.addEventListener('focus',function(e){console.log(e)}, true);
 	
 		function filter (elementsArray){
 			var notAllowed = " BR HR X-RIGHE ";
@@ -76,17 +76,17 @@
 	</script>
 
 	<?php
+	$testAllComponents='';
 		function loadComponentsFromDir ($dir){
+		global $testAllComponents;
 			// create a handler for the directory
 			$handler = opendir($dir);
 
 			// open directory and walk through the filenames
 			while ($file = readdir($handler)) {
-//echo "\n".$file;
-				// if file isn't this directory or its parent, add it to the results
-				//if ($file != "." && $file != "..") {
 				if (strpos($file, '.html')) {
 					echo "\n".'<link rel="import" href="./'.$dir.'/'.$file.'">';
+					$testAllComponents.= "\n<br><br><br><br><br><hr>".$file."<br> <".str_replace('.html','',$file).'></'.str_replace('.html','',$file).'>';
 				}
 			}		
 		};
@@ -95,12 +95,13 @@
 		loadComponentsFromDir('components');
 		//loadComponentsFromDir('toolkit/components');
 	?>
+
 <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
 <style>
 input {
-	color:red;
-	border: 0px solid #a1a1a1;
-	background-color: #e1e1e1;
+	color:black;
+	border: 1px solid #a1a1a1;
+	background-color: white;
 	font-size:1em;
 	font-family: 'Inconsolata', sans-serif;
 }
@@ -116,15 +117,34 @@ label {
 	background-color: #F2F2F2;
 	PADDING:0.5em;
 	width:0px;
-	visibility:hidden;
+	/*visibility:hidden;*/
 }
 
 </style>
 </head>
 <body>
-<x-gestioneddt></x-gestioneddt>
+Test
+
+<x-ddt></x-ddt>
+
+
 <!--
-<x-query-window params='{"_type":"causalispedizione","codice":["!=",""]}'><x-query-window>
+<x-query-window></x-query-window>
+
+<x-window title="My window">
+<x-menu>
+	<x-menuitem>111</x-menuitem>
+	<x-menuitem>111</x-menuitem>
+	<x-menuitem>111</x-menuitem>
+	<x-menuitem>111</x-menuitem>
+	<x-menuitem>111</x-menuitem>
+	<x-menuitem>111</x-menuitem>
+	
+</x-menu>
+</x-window>
 -->
+<?php
+//echo $testAllComponents;
+?>
 </body>
 </html>

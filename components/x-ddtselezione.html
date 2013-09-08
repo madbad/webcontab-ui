@@ -1,4 +1,4 @@
-<element name="x-ddtselezione" attributes="numero data fornitore causale">
+<polymer-element name="x-ddtselezione" attributes="numero data fornitore causale">
 	<template>
 		<x-numero label="Numero"></x-numero>
 		<x-data></x-data>
@@ -8,7 +8,7 @@
 		<x-causale></x-causale>
 	</template>
 	<script>
-	Polymer.register(this,{
+	Polymer('x-ddtselezione',{
 		numeroChanged: function (){
 			console.log('numero changed');
 		},
@@ -31,4 +31,4 @@
 		getFocusAble : getFocusAble,
 	});
 	</script>
-</element>
+</polymer-element>

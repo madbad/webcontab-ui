@@ -1,13 +1,13 @@
-<element name="x-vettore" attributes="value">
+<polymer-element name="x-vettore" attributes="value">
 	<template>
 		<x-vettorecodice value="{{value}}"></x-vettorecodice>
 		<x-vettoreragionesociale></x-vettoreragionesociale>		
 	</template>
 	<script>
-	Polymer.register(this, {
+	Polymer('x-vettore', {
 		_type: 'vettore',
 		value: '',
-		ready: function (){
+		created: function (){
 
 			this.codice = this.webkitShadowRoot.querySelector('x-vettorecodice').webkitShadowRoot.querySelector('input');
 			this.ragionesociale =  this.webkitShadowRoot.querySelector('x-vettoreragionesociale').webkitShadowRoot.querySelector('input');
@@ -28,7 +28,7 @@
 				//chiedo al server di mandarmi i nuovi dati
 				$.ajax({
 					type: "POST",
-					url: "./../webContab/my/php/do.php",
+					url: "./../webContab/my/php/core/do.php",
 					data: { action: 'getOne',
 							params: {
 										_type: this._type,
@@ -69,6 +69,6 @@
 		getFocusAble : getFocusAble,
 	});
 	</script>
-</element>
+</polymer-element>
 
 

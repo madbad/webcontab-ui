@@ -1,4 +1,4 @@
-<element name="x-window" attributes="title">
+<polymer-element name="x-window" attributes="title">
 	<template>
 		<style>
 		  .window {
@@ -33,15 +33,15 @@
 		</div>
 	</template>
 	<script>
-	Polymer.register(this, {
+	Polymer('x-window', {
 		uiOnly: true,
 		title: '',
 		close: function (){},
 		hide: function () {},
 		minimize: function (){},
-		ready : function (){
+		created: function (){
 			this.tabIndex = 0;
-			console.log('IO SONO STATO CREATO DA ', this, this.host);
+			//console.log('IO SONO STATO CREATO DA ', this, this.host);
 		},
 		setPosition: function (htmlElement, htmlElementPoint, myPoint){
 
@@ -60,4 +60,4 @@
 
 	});
 	</script>
-</element>
+</polymer-element>

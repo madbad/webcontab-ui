@@ -1,13 +1,13 @@
-<element name="x-fornitore-ragionesociale">
+<polymer-element name="x-fornitore-ragionesociale">
 	<template>
 		<input type="text" value="{{value}}" maxlength="40" size="40">
 	</template>
 	<script>
-	Polymer.register(this, {
+	Polymer('x-fornitore-ragionesociale', {
 		value: '',
 		focus: function (){
 			this.webkitShadowRoot.querySelector('input').focus();
 		}
 	});
 	</script>
-</element>
+</polymer-element>

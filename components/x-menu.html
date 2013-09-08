@@ -1,4 +1,4 @@
-<element name="x-menu">
+<polymer-element name="x-menu">
 	<template>
 		<style>
 		  .menu {
@@ -18,8 +18,33 @@
 		</div>
 	</template>
 	<script>
-	Polymer.register(this, {
-		value: '',
-	});
+	Polymer('x-menu',{
+	
+	created: function (){
+		console.log('MENU CREATO!!!!!!!!!!!!!!!!!!!')
+		//do il focus alla mia finestra
+		$(this).focus();
+
+		//manage keyboard events
+		$(this).keydown(function(event) {
+			switch (event.which){
+				case 38: this.table.prev();	break; //up
+				case 40: this.table.next();	break; //down
+				case 13: this.confirm(); break; //enter
+				case 27: this.cancel(); break; //esc
+			}
+		});
+	},	
+	confirm : function (){
+		//remove me from the dom
+		this.parentNode.removeChild(this);
+		//and return the value
+		return this.table.getSelection();
+	},
+	cancel : function (){
+		//remove me from the dom without returning any value
+		this.parentNode.removeChild(this);
+	}	
+});
 	</script>
-</element>
+</polymer-element>

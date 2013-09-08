@@ -1,4 +1,4 @@
-<element name="x-tabs">
+<polymer-element name="x-tabs">
 	<template>
 		<style>
 		  .labels{
@@ -38,18 +38,9 @@
 		<div class="pannels" id="pannels">
 			<content></content>
 		</div>
-		<!--
-		<div class="menu">
-			<x-menu>
-				<x-menuitem action="Select testata">Testata</x-menuitem>
-				<x-menuitem action="Select dettaglio">Dettagllio</x-menuitem>
-				<x-menuitem action="Select stampa">Stampa</x-menuitem>				
-			</x-menu>
-		</div>
-		-->
 	</template>
 	<script>
-    Polymer.register(this, {
+    Polymer('x-tabs', {
 		uiOnly: true,
 		ready: function() {
 	  
@@ -63,21 +54,24 @@
 					//the title of the tabcontent
 					var id = this.children[tabid].title;
 					
-					//setup the tablabel
+					//setup the tab-label
 					var newLabel = document.createElement('div');
 					newLabel.innerHTML = id; 
 					newLabel.title = id;
 					newLabel.onclick = this.select.bind(this);
 					
-					//add the tab label to the dom
+					//add the tab-label to the dom
 					this.$.labels.appendChild(newLabel);
 					
 					//each panel when lose the focus show a menu
+					
 					this.children[tabid].onleaving = function (){
 						console.log('using bind on', this)
 						console.log('show the menu');
 						var menu = document.createElement('x-query-window');
 						menu.jsonList =$.parseJSON('[{"menu":"Testata"},{"menu":"Dettaglio"},{"menu":"Stampa"}]');
+						console.log('STO CREANDO IL MENU');
+						//console.log(menu.jsonList);
 						menu.jsonToTable(menu.jsonList);
 						menu.webkitShadowRoot.querySelector('x-window').setPosition(this.webkitShadowRoot.querySelector('#pannels'), 'TL', 'TL');
 						this.webkitShadowRoot.appendChild(menu);
@@ -90,7 +84,7 @@
 						//do not leave the panel
 						return false;
 					}.bind(this)
-
+					
 					//on the start i show only the firs tab
 					if(tabid==0){
 						this.children[tabid].show();								
@@ -138,4 +132,4 @@
 		getFocusAble: getFocusAble,
     });
 	</script>
-</element>
+</polymer-element>

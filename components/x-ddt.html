@@ -1,4 +1,4 @@
-<element name="x-gestioneddt">
+<polymer-element name="x-ddt">
 	<template>
 		<x-window title="Gestione Ddt">
 				<x-ddtselezione></x-ddtselezione>
@@ -18,34 +18,16 @@
 							- Note
 						</x-pannel>
 				</x-tabs>
-<!--
-				<x-app>
-					<span>test</span>
-					<span>test2</span>
-					<span>test3</span>
-				</x-app>
--->
-<!--
-<x-menu>
-	<x-menuitem action="doStuff">Testata</x-menuitem>
-	<x-menuitem action="doStuff">Dettaglio</x-menuitem>
-	<x-menuitem action="doStuff">Varie</x-menuitem>
-	<x-menuitem action="">---</x-menuitem>
-	<x-menuitem action="doStuff">Stampa</x-menuitem>
-	<x-menuitem action="doStuff">Memorizza</x-menuitem>
-	<x-menuitem action="doStuff">Abbandona</x-menuitem>
-	<x-menuitem action="doStuff">Do something</x-menuitem>
-</x-menu>
--->
 		</x-window>	
 	</template>
 	<script>
-	Polymer.register(this,{
+	Polymer('x-ddt',{
 	get : function (){
+console.info('test');
 		/*perform an ajax request to get the ddt*/
 		$.ajax({
 			type: "POST",
-			url: "./../webContab/my/php/do.php",
+			url: "./../webContab/my/php/core/do.php",
 			data: { action: 'getOne',
 					params: {
 								_type: 'Ddt',
@@ -56,8 +38,9 @@
 			},
 			context: this,
 		}).done(function( msg ) {
-			var ddt = $.parseJSON(msg).ddt;
 
+			var ddt = $.parseJSON(msg).ddt;
+console.log(ddt);
 			//console.log(ddt);
 			for (var prop in ddt){
 				//console.log(prop);
@@ -79,9 +62,8 @@
 		});
 
 	},
-	ready: function (){
+	created: function (){
 		myddt = this;
-	//console.log(this);
 		/*map some property to the html elements*/
 		this._type = {value:''};
 		this.cod_mezzo = this.webkitShadowRoot.querySelector('x-spedizione').codice;
@@ -109,8 +91,7 @@
 		this.stato = {value:''};
 		this.fatturabile = {value:''};
 		this.tipocodiceclientefornitore = {value:''};
-		
-		
+	
 		this.get();
 		
 		//manage keyboard events
@@ -139,4 +120,4 @@
 		getFocusAble : getFocusAble,
 	});	
 	</script>
-</element>
+</polymer-element>

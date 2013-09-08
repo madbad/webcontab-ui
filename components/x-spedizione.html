@@ -1,13 +1,13 @@
-<element name="x-spedizione" attributes="value">
+<polymer-element name="x-spedizione" attributes="value">
 	<template>
 		<x-spedizionecodice value="{{value}}"></x-spedizionecodice>
 		<x-spedizionedescrizione></x-spedizionedescrizione>
 	</template>
 	<script>
-	Polymer.register(this, {
+	Polymer('x-spedizione', {
 		_type: 'causalispedizione',
 		value: '',
-		ready: function (){
+		created: function (){
 
 			this.codice = this.webkitShadowRoot.querySelector('x-spedizionecodice').webkitShadowRoot.querySelector('input');
 			this.descrizione =  this.webkitShadowRoot.querySelector('x-spedizionedescrizione').webkitShadowRoot.querySelector('input');
@@ -28,7 +28,7 @@
 				//chiedo al server di mandarmi i nuovi dati
 				$.ajax({
 					type: "POST",
-					url: "./../webContab/my/php/do.php",
+					url: "./../webContab/my/php/core/do.php",
 					data: { action: 'getOne',
 							params: {
 										_type: this._type,
@@ -63,6 +63,6 @@
 		getFocusAble : getFocusAble,
 	});
 	</script>
-</element>
+</polymer-element>
 
 

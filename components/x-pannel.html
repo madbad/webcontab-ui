@@ -1,4 +1,4 @@
-<element name="x-pannel" attributes="title">
+<polymer-element name="x-pannel" attributes="title">
 	<template>	
     <style>
    .hidden {
@@ -13,7 +13,7 @@
 		<content></content>
 	</template>
   <script>
-    Polymer.register(this, {
+    Polymer('x-pannel', {
 		uiOnly: true,
 		ready: function() {
 
@@ -48,4 +48,4 @@
 		getFocusAble : getFocusAble,
     });
   </script>
-</element>
+</polymer-element>

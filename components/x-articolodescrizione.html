@@ -1,4 +1,4 @@
-<element name="x-articolodescrizione" attributes="value lenght">
+<polymer-element name="x-articolodescrizione" attributes="value lenght">
 	<template>
 		<label>
 			Descr.
@@ -6,7 +6,7 @@
 		</label>
 	</template>
 	<script>
-	Polymer.register(this, {
+	Polymer('x-articolodescrizione', {
 		value: '',
 		lenght: 15,
 		focus: function (){
@@ -14,4 +14,4 @@
 		}
 	});
 	</script>
-</element>
+</polymer-element>

@@ -1,4 +1,4 @@
-<element name="x-riga" attributes="value">
+<polymer-element name="x-riga" attributes="value">
     <style>
 		@host{
 			* {
@@ -26,9 +26,9 @@
 		</div>
 	</template>
 	<script>
-	Polymer.register(this, {
+	Polymer('x-riga', {
 		value: '',
-		ready: function (){
+		created: function (){
 			this._type = {value:''};
 			this.cod_articolo= this.webkitShadowRoot.querySelector('x-articolo').webkitShadowRoot.querySelector('x-articolocodice');
 			this.colli= this.webkitShadowRoot.querySelector('x-colli');
@@ -82,6 +82,6 @@
 		getFocusAble : getFocusAble,
 	});
 	</script>
-</element>
+</polymer-element>
 
 

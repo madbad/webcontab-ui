@@ -1,4 +1,4 @@
-<element name="x-query-window" attributes="params" extends="x-window" jsonList="">
+<polymer-element name="x-query-window" attributes="params" extends="x-window" jsonList="">
 	<template>
 		<style>
 		  table {
@@ -31,9 +31,9 @@
 
 	</template>
 	<script>
-	Polymer.register(this,{
+	Polymer('x-query-window',{
 	
-	ready: function (){
+	created: function (){
 		//creo i parametri della query da una stringa json
 		if(this.params){
 			this.params = this.params.replace("'/g", '"');
@@ -68,13 +68,14 @@
 		/*perform an ajax request to get the list to display*/
 		$.ajax({
 			type: "POST",
-			url: "./../webContab/my/php/do.php",
+			url: "./../webContab/my/php/core/do.php",
 			data: { action: 'getAll',
 					params: $.parseJSON(this.params)
 			},
 			context: this,
 		}).done(function( msg ) {
 			if (msg){
+				console.log(msg);
 				var jsonList = $.parseJSON(msg);
 				this.jsonToTable(jsonList);
 			}
@@ -82,6 +83,7 @@
 	},
 	
 	jsonToTable : function (list){
+	console.log('STO CREANDO LA TABELLA')
 		for (var i=0; i < list.length; i++){
 			//creo le colonne
 			if(i==0){
@@ -96,20 +98,23 @@
 				//mi ricordo la lista degli oggetto
 				table.list = list;
 			}
-			//creo le righe
-			this.webkitShadowRoot.querySelector('x-window').appendChild(table)
-			
+
+
 			//creo una nuova riga
 			var MyRow = document.createElement('tr');
 			MyRow.id='r'+i;
-			table.appendChild(MyRow);
+
 			
 			//con tutti i campi
 			for (prop in list[i]){
 				MyRow.innerHTML+='<td>'+list[i][prop]+'</td>';
 			}
+			table.appendChild(MyRow);
 		}
-		
+			console.log(table.innerHTML);		
+			this.webkitShadowRoot.querySelector('x-window').appendChild(table);
+			//this.webkitShadowRoot.querySelector('x-window').innerHTML='provaaaaaaaaaaaaaaaaaaaaaaaaaa';
+
 		//seleziona una riga della tabella
 		table.select = function (id){
 			//deseleziona vecchio elemento
@@ -165,8 +170,9 @@
 	},
 	focus: function () {
 		//do il focus alla mia finestra
+		console.log(this.webkitShadowRoot.querySelector('x-window'));
 		$(this.webkitShadowRoot.querySelector('x-window')).focus();	
 	}
 });
 	</script>
-</element>
+</polymer-element>

@@ -1,15 +1,15 @@
-<element name="x-tara" attributes="value">
+<polymer-element name="x-tara" attributes="value">
 	<template>
 		<x-numero interi="5" decimali="1" label="Tara">{{value}}</x-numero>
 	</template>
 	<script>
-	Polymer.register(this, {
+	Polymer('x-tara', {
 		value: '',
 		focus: function (){
 			this.webkitShadowRoot.querySelector('x-numero').focus();
 		}
 	});
 	</script>
-</element>
+</polymer-element>
 
 

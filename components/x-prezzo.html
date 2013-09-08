@@ -1,4 +1,4 @@
-<element name="x-prezzo" attributes="value">
+<polymer-element name="x-prezzo" attributes="value">
 	<template>
 		<label>
 			Prezzo
@@ -6,13 +6,13 @@
 		</label>
 	</template>
 	<script>
-	Polymer.register(this, {
+	Polymer('x-prezzo', {
 		value: '',
 		focus: function (){
 			this.webkitShadowRoot.querySelector('input').focus();
 		}
 	});
 	</script>
-</element>
+</polymer-element>
 
 

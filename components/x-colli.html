@@ -1,4 +1,4 @@
-<element name="x-colli" attributes="value">
+<polymer-element name="x-colli" attributes="value">
 	<template>
 		<label>
 			Colli
@@ -6,13 +6,13 @@
 		</label>
 	</template>
 	<script>
-	Polymer.register(this, {
+	Polymer('x-colli', {
 		value: '',
 		focus: function (){
 			this.webkitShadowRoot.querySelector('input').focus();
 		}		
 	});
 	</script>
-</element>
+</polymer-element>
 
 

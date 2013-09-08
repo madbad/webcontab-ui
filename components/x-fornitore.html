@@ -1,4 +1,4 @@
-<element name="x-fornitore" attributes="value">
+<polymer-element name="x-fornitore" attributes="value">
 	<template>
 
 			Codice
@@ -7,10 +7,10 @@
 			<x-fornitore-ragionesociale></x-fornitore-ragionesociale>
 	</template>
 	<script>
-	Polymer.register(this, {
+	Polymer('x-fornitore', {
 		_type: 'clientefornitore',
 		value: '',
-		ready: function (){
+		created: function (){
 
 			this.codice = this.webkitShadowRoot.querySelector('x-fornitore-codice').webkitShadowRoot.querySelector('input');
 			this.ragionesociale =  this.webkitShadowRoot.querySelector('x-fornitore-ragionesociale').webkitShadowRoot.querySelector('input');
@@ -31,7 +31,7 @@
 				//chiedo al server di mandarmi i nuovi dati
 				$.ajax({
 					type: "POST",
-					url: "./../webContab/my/php/do.php",
+					url: "./../webContab/my/php/core/do.php",
 					data: { action: 'getOne',
 							params: {
 										_type: this._type,
@@ -69,4 +69,4 @@
 
 	});
 	</script>
-</element>
+</polymer-element>
