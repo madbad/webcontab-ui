@@ -1,11 +1,18 @@
 <!doctype html>
 <html>
 <head>
-	<script src="./jquery.min.js"></script>
 	
  <script src="./polymer/polymer-v0.0.20130905.min.js" log=""></script>
+ <script src="./jquery.min.js"></script>
 	<script>
-	//document.addEventListener('focus',function(e){console.log(e)}, true);
+		$(document).keydown(function(event) {
+			switch (event.which){
+				default: console.log(event.currentTarget.activeElement.nodeName);
+			}
+			
+			//return false;
+		});
+
 	
 		function filter (elementsArray){
 			var notAllowed = " BR HR X-RIGHE ";
@@ -123,14 +130,15 @@ label {
 </style>
 </head>
 <body>
-Test
-
+<!--
 <x-ddt></x-ddt>
-
+-->
 
 <!--
 <x-query-window></x-query-window>
-
+-->
+<x-query-window params='{"_type":"causalispedizione","codice":["!=",""]}'><x-query-window>;
+<!--
 <x-window title="My window">
 <x-menu>
 	<x-menuitem>111</x-menuitem>

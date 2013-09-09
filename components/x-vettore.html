@@ -37,6 +37,10 @@
 					},
 					context: this,
 				}).done(function( msg ) {
+				//console.log("segue...");
+				//MYLOG2=this+'111';
+				//console.log(this.codice);
+				//console.log(msg);
 					var json = $.parseJSON(msg)[this['_type']];
 					if (json.ragionesociale){
 						this.ragionesociale.value = json.ragionesociale;
@@ -44,8 +48,7 @@
 						console.log('Non trovato: '+this._type+' = '+this.value);
 					}
 				});				
-			},
-			
+			};	
 			//manage keyboard events
 			$(this).keydown(function(event) {
 				switch (event.which){
@@ -57,11 +60,6 @@
 			/*focus management*/
 			this.focusAbleContainer = this.webkitShadowRoot;
 		},
-/*
-		focus: function (){
-			this.webkitShadowRoot.querySelector('x-vettorecodice').focus();
-		}
-*/
 		/*focus management*/
 		focusedID: -1,
 		focus: focus,

@@ -31,16 +31,17 @@ console.info('test');
 			data: { action: 'getOne',
 					params: {
 								_type: 'Ddt',
-								numero: '2886',
+								numero: '2885',
 								data: '22/09/2012'
 								//_autoExtend: -2,
 					},
 			},
 			context: this,
 		}).done(function( msg ) {
-
+MYLOG=msg;
 			var ddt = $.parseJSON(msg).ddt;
-console.log(ddt);
+//console.log(this);
+
 			//console.log(ddt);
 			for (var prop in ddt){
 				//console.log(prop);
@@ -57,7 +58,7 @@ console.log(ddt);
 				}
 				
 			}
-			//console.log(this);
+			console.log(this);
 		//console.log(this.nodeName+' <> '+this.value);	
 		});
 

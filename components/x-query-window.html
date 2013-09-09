@@ -32,7 +32,6 @@
 	</template>
 	<script>
 	Polymer('x-query-window',{
-	
 	created: function (){
 		//creo i parametri della query da una stringa json
 		if(this.params){
@@ -47,9 +46,10 @@
 		}
 
 		//do il focus alla mia finestra
-		$(this.webkitShadowRoot.querySelector('x-window')).focus();
-
+		this.focus();
+		
 		//manage keyboard events
+		console.log(this);
 		$(this).keydown(function(event) {
 			switch (event.which){
 				case 38: this.table.prev();	break; //up
@@ -61,7 +61,7 @@
 		});
 		
 		//
-		console.log('IO SONO STATO CREATO DA ', this, this.host);
+		//console.log('IO SONO STATO CREATO DA ', this, this.host);
 	},
 	
 	getFromServer : function (){
@@ -75,7 +75,6 @@
 			context: this,
 		}).done(function( msg ) {
 			if (msg){
-				console.log(msg);
 				var jsonList = $.parseJSON(msg);
 				this.jsonToTable(jsonList);
 			}
@@ -83,7 +82,7 @@
 	},
 	
 	jsonToTable : function (list){
-	console.log('STO CREANDO LA TABELLA')
+	//console.log('STO CREANDO LA TABELLA')
 		for (var i=0; i < list.length; i++){
 			//creo le colonne
 			if(i==0){
@@ -111,9 +110,8 @@
 			}
 			table.appendChild(MyRow);
 		}
-			console.log(table.innerHTML);		
-			this.webkitShadowRoot.querySelector('x-window').appendChild(table);
-			//this.webkitShadowRoot.querySelector('x-window').innerHTML='provaaaaaaaaaaaaaaaaaaaaaaaaaa';
+
+		this.webkitShadowRoot.querySelector('x-window').appendChild(table);
 
 		//seleziona una riga della tabella
 		table.select = function (id){
@@ -168,11 +166,22 @@
 	},
 	onConfirm: function (selection){/*use this as a callback*/
 	},
+	
 	focus: function () {
 		//do il focus alla mia finestra
+		//console.log(this.webkitShadowRoot.querySelector('x-window'));
+		/*
+		console.log('PRE');
+		console.log(document.activeElement);
+		console.log('SELECTING');
 		console.log(this.webkitShadowRoot.querySelector('x-window'));
-		$(this.webkitShadowRoot.querySelector('x-window')).focus();	
+		$(this.webkitShadowRoot.querySelector('x-window')).focus();
+		console.log('AFTER');
+		console.log(document.activeElement);
+		*/
+		console.log('focus given');
 	}
+	
 });
 	</script>
 </polymer-element>
