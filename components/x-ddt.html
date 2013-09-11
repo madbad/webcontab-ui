@@ -23,7 +23,7 @@
 	<script>
 	Polymer('x-ddt',{
 	get : function (){
-console.info('test');
+
 		/*perform an ajax request to get the ddt*/
 		$.ajax({
 			type: "POST",
@@ -38,15 +38,10 @@ console.info('test');
 			},
 			context: this,
 		}).done(function( msg ) {
-MYLOG=msg;
 			var ddt = $.parseJSON(msg).ddt;
-//console.log(this);
 
-			//console.log(ddt);
 			for (var prop in ddt){
-				//console.log(prop);
 				if (!prop.search('cod_') && typeof ddt[prop] == 'object'){
-				//console.log('code');
 					this[prop].value = ddt[prop].codice;
 				}else{
 					this[prop].value = ddt[prop];
@@ -58,13 +53,11 @@ MYLOG=msg;
 				}
 				
 			}
-			console.log(this);
-		//console.log(this.nodeName+' <> '+this.value);	
 		});
 
 	},
 	created: function (){
-		myddt = this;
+		ddt = this;
 		/*map some property to the html elements*/
 		this._type = {value:''};
 		this.cod_mezzo = this.webkitShadowRoot.querySelector('x-spedizione').codice;

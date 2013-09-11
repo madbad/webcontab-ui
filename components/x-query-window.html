@@ -117,7 +117,7 @@
 		table.select = function (id){
 			//deseleziona vecchio elemento
 			if (this.selected != null){
-				this.querySelector('#r'+this.selected).classList.toggle('selected');			
+				this.querySelector('#r'+this.selected).classList.toggle('selected');
 			}
 			
 			//seleziona il nuovo elemento
@@ -170,7 +170,7 @@
 	focus: function () {
 		//do il focus alla mia finestra
 		//console.log(this.webkitShadowRoot.querySelector('x-window'));
-		/*
+		
 		console.log('PRE');
 		console.log(document.activeElement);
 		console.log('SELECTING');
@@ -178,8 +178,11 @@
 		$(this.webkitShadowRoot.querySelector('x-window')).focus();
 		console.log('AFTER');
 		console.log(document.activeElement);
-		*/
+		
 		console.log('focus given');
+	
+		console.log(this.webkitShadowRoot.querySelector('input'));
+		
 	}
 	
 });

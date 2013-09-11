@@ -42,7 +42,7 @@
 			var focusable = this.getFocusAble();
 			if(this.focusedID < focusable.length){
 				focusable[this.focusedID].focus();
-				console.log('focusing from=> ',this,' To=> ' , focusable[this.focusedID])
+				console.log('focusing from=> ',this.nodeName,' To=> ' , focusable[this.focusedID].nodeName)
 				return false;
 			}else{
 				if(typeof this.onleaving === 'function'){
@@ -120,25 +120,27 @@ body{
 
 
 label {
+	color:black;
 	font-size:1em;
 	background-color: #F2F2F2;
 	PADDING:0.5em;
 	width:0px;
 	/*visibility:hidden;*/
 }
+input {
+color:blue;
+}
 
 </style>
 </head>
 <body>
-<!--
+
 <x-ddt></x-ddt>
--->
+
 
 <!--
 <x-query-window></x-query-window>
--->
 <x-query-window params='{"_type":"causalispedizione","codice":["!=",""]}'><x-query-window>;
-<!--
 <x-window title="My window">
 <x-menu>
 	<x-menuitem>111</x-menuitem>

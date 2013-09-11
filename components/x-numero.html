@@ -16,10 +16,15 @@
 			this.tabIndex = 0;
 			if(this.decimali>0){var virgola=1;}else{var virgola=0;}
 			this.totalecaratteri = this.interi+virgola+this.decimali;
+			$(this.webkitShadowRoot.querySelector('input')).focus();
+			this.webkitShadowRoot.querySelector('input').onblur = function(){alert('hoperso il focus');}
 			
 		},
 		focus: function (){
-			this.webkitShadowRoot.querySelector('input').focus();
+			console.log('the focus funcion of xnumero has been called!');
+			console.log(this.webkitShadowRoot.querySelector('input'));
+			//this.webkitShadowRoot.querySelector('input').impl.color='red';
+			console.log(this.webkitShadowRoot.querySelector('input').impl.focus());
 		}
 	});
 	</script>
