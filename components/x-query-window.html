@@ -1,6 +1,9 @@
-<polymer-element name="x-query-window" attributes="params" extends="x-window" jsonList="">
+<polymer-element name="x-query-window" attributes="params" extends="x-window" jsonList="" tabindex="0">
 	<template>
 		<style>
+		@host:active{
+			/*color:red;*/
+		}
 		  table {
 			width:100%;
 			padding:0px;
@@ -23,11 +26,12 @@
 			border-bottom: 1px solid #e1e1e1;
 		  }
 		  .selected {
+			color:white;
 			background-color:black;
 		  }
 		</style>
 		
-		<x-window title="Seleziona un elemento..." tabindex="0"></x-window>
+		<x-window title="Seleziona un elemento..."></x-window>
 
 	</template>
 	<script>
@@ -46,7 +50,8 @@
 		}
 console.log('qw1');
 		//do il focus alla mia finestra
-		this.myfocus();
+
+		//this.focus();
 console.log('qw2');
 		//manage keyboard events
 		//console.log(this);
@@ -56,10 +61,11 @@ console.log('qw2');
 				case 40: this.table.next();	break; //down
 				case 13: this.confirm(); break; //enter
 				case 27: this.cancel(); break; //esc
+				default: console.log('keypress on the qw');
 			}
 			//return false;
 		});
-		
+		this.myfocus();
 		//
 		//console.log('IO SONO STATO CREATO DA ', this, this.host);
 	},
@@ -82,14 +88,15 @@ console.log('qw2');
 	},
 	
 	jsonToTable : function (list){
-	//console.log('STO CREANDO LA TABELLA')
+		//console.log('STO CREANDO LA TABELLA')
 		for (var i=0; i < list.length; i++){
 			//creo le colonne
 			if(i==0){
 				var table = document.createElement('table');
+				table.tabIndex=0;
 				var row = document.createElement('tr');
 				table.appendChild(row);
-				
+
 				//creo una intestazione per ogni proprieta dell'oggetto /*todo nascondi propietà nascoste (quelle che iniziano con "_" )*/
 				for (prop in list[i]){
 					row.innerHTML+='<th>'+prop+'</th>';
@@ -102,6 +109,7 @@ console.log('qw2');
 			//creo una nuova riga
 			var MyRow = document.createElement('tr');
 			MyRow.id='r'+i;
+			MyRow.tabIndex=0;
 
 			
 			//con tutti i campi
@@ -177,10 +185,13 @@ console.log('qw2');
 		console.log(this.webkitShadowRoot.querySelector('x-window'));
 		*/
 		//this.webkitShadowRoot.querySelector('x-window').myfocus();
+		//this.focus();
 			setTimeout(function (){
+		console.log('richiamo il focus');
 				//this.webkitShadowRoot.querySelector('table').focus();
-				this.focus();
+				$(this).focus();
 			}.bind(this), 1);
+		
 		/*
 		console.log('AFTER');
 		console.log(document.activeElement);
