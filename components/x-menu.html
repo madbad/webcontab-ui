@@ -13,38 +13,52 @@
 			background-color:white;
 		  }
 		</style>
-		<div class="menu">
+		<div class="menu" tabindex="1">
 			<content></content>
 		</div>
 	</template>
 	<script>
 	Polymer('x-menu',{
+		
+		created: function (){
+			//console.log('MENU CREATO!!!!!!!!!!!!!!!!!!!')
+			//do il focus alla mia finestra
+			//$(this).myfocus();
+			/*
+			setTimeout(function (){
+				this.webkitShadowRoot.querySelector('#menu').focus();
+			}.bind(this), 1);
+			*/
+			this.myfocus();
+			//manage keyboard events
+			$(this).keydown(function(event) {
+				switch (event.which){
+					case 38: this.table.prev();	break; //up
+					case 40: this.table.next();	break; //down
+					case 13: this.confirm(); break; //enter
+					case 27: this.cancel(); break; //esc
+				}
+			});
+		},	
+		confirm : function (){
+			//remove me from the dom
+			this.parentNode.removeChild(this);
+			//and return the value
+			return this.table.getSelection();
+		},
+		cancel : function (){
+			//remove me from the dom without returning any value
+			this.parentNode.removeChild(this);
+		},
 	
-	created: function (){
-		//console.log('MENU CREATO!!!!!!!!!!!!!!!!!!!')
-		//do il focus alla mia finestra
-		$(this).focus();
+	/*focus management*/
+		myfocus: function (){
+			setTimeout(function (){
+				console.log('the focus is now on the menu')
+				this.webkitShadowRoot.querySelector('#menu').focus();
+			}.bind(this), 1);
+		}
 
-		//manage keyboard events
-		$(this).keydown(function(event) {
-			switch (event.which){
-				case 38: this.table.prev();	break; //up
-				case 40: this.table.next();	break; //down
-				case 13: this.confirm(); break; //enter
-				case 27: this.cancel(); break; //esc
-			}
-		});
-	},	
-	confirm : function (){
-		//remove me from the dom
-		this.parentNode.removeChild(this);
-		//and return the value
-		return this.table.getSelection();
-	},
-	cancel : function (){
-		//remove me from the dom without returning any value
-		this.parentNode.removeChild(this);
-	}	
 });
 	</script>
 </polymer-element>

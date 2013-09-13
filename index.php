@@ -5,14 +5,10 @@
  <script src="./polymer/polymer-v0.0.20130905.min.js" log=""></script>
  <script src="./jquery.min.js"></script>
 	<script>
-		$(document).keydown(function(event) {
-			switch (event.which){
-				default: console.log(event.currentTarget.activeElement.nodeName);
-			}
-			
-			//return false;
+		$(document.body).keydown(function(event) {
+			console.log(event.which);
+			console.log(event.currentTarget.nodeName);
 		});
-
 	
 		function filter (elementsArray){
 			var notAllowed = " BR HR X-RIGHE ";
@@ -31,31 +27,35 @@
 			}
 			return filtered;
 		};
-		var focus= function (){
-			console.log('received focus ',this.nodeName, this);
+		var myfocus= function (){
+			//alert('received fosus:'+this.nodeName);
+			//console.log('received focus ',this.nodeName, this);
 			//reset the current status
 			this.focusedID = -1;
 			this.focusNext();
 		};
 		var focusNext= function () {
+
+			console.log('focusing from '+this.nodeName);
+			//console.log(this.nodeName);
+
 			this.focusedID = this.focusedID + 1;
 			var focusable = this.getFocusAble();
 			if(this.focusedID < focusable.length){
-				focusable[this.focusedID].focus();
-				console.log('focusing from=> ',this.nodeName,' To=> ' , focusable[this.focusedID].nodeName)
+				focusable[this.focusedID].myfocus();
+				console.log(' focusing from=> ',this.nodeName,' To=> ' , focusable[this.focusedID].nodeName)
 				return false;
 			}else{
 				if(typeof this.onleaving === 'function'){
 					return this.onleaving();
 				}
-				console.log('nothing else to focus...giving up',this.nodeName, this);
+				console.log('nothing else to focus...giving up',this.nodeName);
 				return true;
 			}
 		};
 		var getFocusAble = function (){
 			element = this.focusAbleContainer;
 			var childrens = filter(element.children);
-			//console.log(childrens);
 			return childrens;
 		}
 
@@ -82,6 +82,15 @@
 
 	</script>
 
+	  <script>
+    window.addEventListener('WebComponentsReady', function() {
+      document.body.style.opacity = 1; // show body now that registration is done.
+
+      document.body.innerHTML = '<x-ddt></x-ddt>'
+    });
+	</script>
+	
+	
 	<?php
 	$testAllComponents='';
 		function loadComponentsFromDir ($dir){
@@ -135,10 +144,11 @@ color:blue;
 </head>
 <body>
 
-<x-ddt></x-ddt>
-
 
 <!--
+
+<x-ddt></x-ddt>
+
 <x-query-window></x-query-window>
 <x-query-window params='{"_type":"causalispedizione","codice":["!=",""]}'><x-query-window>;
 <x-window title="My window">

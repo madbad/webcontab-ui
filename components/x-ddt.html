@@ -85,31 +85,33 @@
 		this.stato = {value:''};
 		this.fatturabile = {value:''};
 		this.tipocodiceclientefornitore = {value:''};
-	
+		
 		this.get();
 		
 		//manage keyboard events
 		$(this).keydown(function(event) {
+			console.log(event.which);
+			console.log(event.currentTarget.nodeName);
 			switch (event.which){
 				case 112: 
 					console.log(event.which);
 					this.webkitShadowRoot.innerHTML +='<x-query-window params=\'{"_type":"causalispedizione","codice":["!=",""]}\'><x-query-window>';
 					event.preventDefault();
-					event.stopPropagation();					
+					event.stopPropagation();
 					break;
 				case 13:
-						return this.focusNext();
-				default: console.log(event.which);
+					return this.focusNext();
+					break;
 			}
 		});
 		/*focus management*/
 		this.focusAbleContainer = this.webkitShadowRoot.querySelector('x-window');
 		
-		this.focus();
+		this.myfocus();
 	},
 		/*focus management*/
 		focusedID: -1,
-		focus: focus,
+		myfocus: myfocus,
 		focusNext: focusNext,
 		getFocusAble : getFocusAble,
 	});	

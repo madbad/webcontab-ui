@@ -37,19 +37,19 @@
 		if(this.params){
 			this.params = this.params.replace("'/g", '"');
 			//ricavo i dati con cui riempire la finestra
-			this.getFromServer();			
+			this.getFromServer();
 		}
 		
 		if(this.jsonList){
 			this.jsonList = $.parseJSON(this.jsonList)
 			this.jsonToTable(this.jsonList);
 		}
-
+console.log('qw1');
 		//do il focus alla mia finestra
-		this.focus();
-		
+		this.myfocus();
+console.log('qw2');
 		//manage keyboard events
-		console.log(this);
+		//console.log(this);
 		$(this).keydown(function(event) {
 			switch (event.which){
 				case 38: this.table.prev();	break; //up
@@ -167,21 +167,28 @@
 	onConfirm: function (selection){/*use this as a callback*/
 	},
 	
-	focus: function () {
+	myfocus: function () {
 		//do il focus alla mia finestra
 		//console.log(this.webkitShadowRoot.querySelector('x-window'));
-		
+		/*
 		console.log('PRE');
 		console.log(document.activeElement);
 		console.log('SELECTING');
 		console.log(this.webkitShadowRoot.querySelector('x-window'));
-		$(this.webkitShadowRoot.querySelector('x-window')).focus();
+		*/
+		//this.webkitShadowRoot.querySelector('x-window').myfocus();
+			setTimeout(function (){
+				//this.webkitShadowRoot.querySelector('table').focus();
+				this.focus();
+			}.bind(this), 1);
+		/*
 		console.log('AFTER');
 		console.log(document.activeElement);
 		
 		console.log('focus given');
 	
 		console.log(this.webkitShadowRoot.querySelector('input'));
+		*/
 		
 	}
 	

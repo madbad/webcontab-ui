@@ -8,7 +8,7 @@
 	<script>
 	Polymer('x-data', {
 		value: new Date().toJSON().slice(0,10),
-		focus: function (){
+		myfocus: function (){
 			this.webkitShadowRoot.querySelector('input').focus();
 		}
 	});
