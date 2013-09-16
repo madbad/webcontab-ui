@@ -5,6 +5,7 @@
  <script src="./polymer/polymer-v0.0.20130905.min.js" log=""></script>
  <script src="./jquery.min.js"></script>
 	<script>
+	var test='aaaa';
 		$(document.body).keydown(function(event) {
 			console.log(event.which);
 			console.log(event.currentTarget.nodeName);

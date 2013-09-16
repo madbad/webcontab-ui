@@ -28,8 +28,9 @@
 			/*color: #dbdbdb;*/
 		  }
 		</style>
-		<div class="window">
+		<div class="window" on-click="setFocus">
 			<div class="title">{{title}}</div>
+			<input id="nameInput"  type="text">
 			<div class="content"><content></content></div>
 		</div>
 	</template>
@@ -40,9 +41,24 @@
 		close: function (){},
 		hide: function () {},
 		minimize: function (){},
+
+		 	enteredView: function() {
+			console.log('we are here!!');
+			this.webkitShadowRoot.querySelector('input').focus();
+      },
+	  
 		created: function (){
+		//console.log(this.webkitShadowRoot.querySelector('input'));
+		//alert('creato x window');
+			//test = this.webkitShadowRoot.querySelector('input');
+			//this.$.nameInput.focus();
 			//this.tabIndex = 0;
 			//console.log('IO SONO STATO CREATO DA ', this, this.host);
+		},
+		setFocus:function (){
+			console.log('gli do il focus');
+			this.webkitShadowRoot.querySelector('input').focus();
+			//this.$.nameInput.focus();
 		},
 		setPosition: function (htmlElement, htmlElementPoint, myPoint){
 
