@@ -47,26 +47,17 @@
 			this.jsonList = $.parseJSON(this.jsonList)
 			this.jsonToTable(this.jsonList);
 		}
-console.log('qw1');
-		//do il focus alla mia finestra
 
-		//this.focus();
-console.log('qw2');
-		//manage keyboard events
-		//console.log(this);
 		$(this).keydown(function(event) {
 			switch (event.which){
 				case 38: this.table.prev();	break; //up
 				case 40: this.table.next();	break; //down
 				case 13: this.confirm(); break; //enter
 				case 27: this.cancel(); break; //esc
-				default: console.log('keypress on the qw');
 			}
 			//return false;
 		});
 		this.myfocus();
-		//
-		//console.log('IO SONO STATO CREATO DA ', this, this.host);
 	},
 	
 	getFromServer : function (){
@@ -175,31 +166,9 @@ console.log('qw2');
 	},
 	
 	myfocus: function () {
-		//do il focus alla mia finestra
-		//console.log(this.webkitShadowRoot.querySelector('x-window'));
-		/*
-		console.log('PRE');
-		console.log(document.activeElement);
-		console.log('SELECTING');
-		console.log(this.webkitShadowRoot.querySelector('x-window'));
-		*/
-		//this.webkitShadowRoot.querySelector('x-window').myfocus();
-		//this.focus();
-			setTimeout(function (){
-		console.log('richiamo il focus');
-				//this.webkitShadowRoot.querySelector('table').focus();
-				$(this).focus();
-			}.bind(this), 1);
-		
-		/*
-		console.log('AFTER');
-		console.log(document.activeElement);
-		
-		console.log('focus given');
-	
-		console.log(this.webkitShadowRoot.querySelector('input'));
-		*/
-		
+		setTimeout(function (){
+				this.focus();
+		}.bind(this), 10);
 	}
 	
 });

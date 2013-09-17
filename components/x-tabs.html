@@ -66,29 +66,15 @@
 					//each panel when lose the focus show a menu
 					
 					this.children[tabid].onleaving = function (){
-				
-						//console.log('using bind on', this)
-						console.log('show the menu');
 						var menu = document.createElement('x-query-window');
-						console.log('point 0 reached');
 						menu.jsonList =$.parseJSON('[{"menu":"Testata"},{"menu":"Dettaglio"},{"menu":"Stampa"}]');
-						console.log('point 0.0 reached');
-						//console.log('STO CREANDO IL MENU');
-						//console.log(menu.jsonList);
 						menu.jsonToTable(menu.jsonList);
-						console.log('point 0.1 reached');
 						menu.webkitShadowRoot.querySelector('x-window').setPosition(this.webkitShadowRoot.querySelector('#pannels'), 'TL', 'TL');
-						console.log('point 0.2 reached');
 						this.webkitShadowRoot.appendChild(menu);
-						console.log('point 1 reached');
-						//menu.myfocus();
-						console.log('point 2 reached');
 
 						menu.onconfirm = function (selection){
-							//console.log('confirming from',this);
 							this.selectByLabel(selection.menu);
 						}.bind(this);
-						console.log('point 3 reached');
 						
 						//do not leave the panel
 						return false;
