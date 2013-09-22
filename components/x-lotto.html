@@ -2,14 +2,14 @@
 	<template>
 		<label>
 			Lotto
-			<input type="text" value="{{value}}">
+			<x-input type="text" value="{{value}}"></x-input>
 		</label>
 	</template>
 	<script>
 	Polymer('x-lotto', {
 		value: '',
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('input').focus();
+			this.webkitShadowRoot.querySelector('x-input').myfocus();
 		}
 	});
 	</script>

@@ -2,14 +2,16 @@
 	<template>
 		<label>
 			Spedizione
-			<input type="text" value="{{value}}"  maxlength="5" size="5">
+			<x-input type="text" value="{{value}}"  maxlength="5" size="5"></x-input>
 		</label>
 	</template>
 	<script>
 	Polymer('x-spedizionecodice', {
 		value: '',
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('input').focus();
+			setTimeout(function (){
+				this.webkitShadowRoot.querySelector('x-input').myfocus();
+			}.bind(this), 50);
 		}
 	});
 	</script>

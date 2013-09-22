@@ -12,15 +12,15 @@
 		value: '',
 		created: function (){
 
-			this.codice = this.webkitShadowRoot.querySelector('x-fornitore-codice').webkitShadowRoot.querySelector('input');
-			this.ragionesociale =  this.webkitShadowRoot.querySelector('x-fornitore-ragionesociale').webkitShadowRoot.querySelector('input');
+			this.codice = this.webkitShadowRoot.querySelector('x-fornitore-codice').webkitShadowRoot.querySelector('x-input').webkitShadowRoot.querySelector('input');
+			this.ragionesociale =  this.webkitShadowRoot.querySelector('x-fornitore-ragionesociale').webkitShadowRoot.querySelector('x-input').webkitShadowRoot.querySelector('input');
 
 			// when the "codice input" change call my "oncodechange" method
 			// faccio questo passamano 
 			//perchè se operassi direttamente nel metodo onchange dell'input 
 			//perdo i riferimenti ad alcune proprietà di x-fornitore che mi servono
 			this.codice.onchange = function (){
-				console.log('the input has changed');		
+				//console.log('the input has changed');		
 				//call the x-fornitore oncodechange function  
 				this.oncodechange();
 			}.bind(this);

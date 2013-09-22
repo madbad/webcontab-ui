@@ -2,14 +2,14 @@
 	<template>
 		<label>
 			UM
-			<input type="text" value="{{value}}"  maxlength="2" size="2">
+			<x-input type="text" value="{{value}}"  maxlength="2" size="2"></x-input>
 		</label>
 	</template>
 	<script>
 	Polymer('x-um', {
 		value: '',
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('input').focus();
+			this.webkitShadowRoot.querySelector('x-input').myfocus();
 		}
 	});
 	</script>

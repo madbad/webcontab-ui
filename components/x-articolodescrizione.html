@@ -2,7 +2,7 @@
 	<template>
 		<label>
 			Descr.
-			<input class="input" type="text" value="{{value}}"  maxlength="{{lenght}}" size="{{lenght}}" style="width:{{lenght}}em">
+			<x-input type="text" value="{{value}}"  maxlength="{{lenght}}" size="{{lenght}}"></x-input>
 		</label>
 	</template>
 	<script>
@@ -10,7 +10,7 @@
 		value: '',
 		lenght: 15,
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('input').focus();
+			this.webkitShadowRoot.querySelector('x-input').myfocus();
 		}
 	});
 	</script>

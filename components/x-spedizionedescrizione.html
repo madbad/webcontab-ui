@@ -2,14 +2,14 @@
 	<template>
 		<label>
 			Descr.
-			<input type="text" value="{{value}}"  maxlength="12" size="12">
+			<x-input type="text" value="{{value}}"  maxlength="12" size="12"></x-input>
 		</label>
 	</template>
 	<script>
 	Polymer('x-spedizionedescrizione', {
 		value: '',
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('input').focus();
+			this.webkitShadowRoot.querySelector('x-input').myfocus();
 		}
 	});
 	</script>

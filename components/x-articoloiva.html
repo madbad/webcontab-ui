@@ -2,14 +2,14 @@
 	<template>
 		<label>
 			Art.Iva
-			<input type="text" value="{{value}}" maxlength="3" size="3">
+			<x-input type="text" value="{{value}}" maxlength="3" size="3"></x-input>
 		</label>
 	</template>
 	<script>
 	Polymer('x-articoloiva', {
 		value: '',
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('input').focus();
+			this.webkitShadowRoot.querySelector('x-input').myfocus();
 		}
 	});
 	</script>

@@ -2,14 +2,14 @@
 	<template>
 		<label>
 			Data
-			<input type="text" value="{{value}}"  maxlength="10" size="10">
+			<x-input type="text" value="{{value}}"  maxlength="10" size="10"></x-input>
 		</label>
 	</template>
 	<script>
 	Polymer('x-data', {
 		value: new Date().toJSON().slice(0,10),
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('input').focus();
+			this.webkitShadowRoot.querySelector('x-input').myfocus();
 		}
 	});
 	</script>

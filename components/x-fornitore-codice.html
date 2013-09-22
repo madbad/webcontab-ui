@@ -1,12 +1,12 @@
 <polymer-element name="x-fornitore-codice" attributes="value">
 	<template>
-		<input type="text" value="{{value}}"  maxlength="5" size="5">
+		<x-input type="text" value="{{value}}"  maxlength="5" size="5"></x-input>
 	</template>
 	<script>
 	Polymer('x-fornitore-codice', {
 		value: '',
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('input').focus();
+			this.webkitShadowRoot.querySelector('x-input').myfocus();
 		}
 	});
 	</script>

@@ -37,20 +37,20 @@
 		};
 		var focusNext= function () {
 
-			console.log('focusing from '+this.nodeName);
+			//console.log('focus management is now assigned to: '+this.nodeName);
 			//console.log(this.nodeName);
 
 			this.focusedID = this.focusedID + 1;
 			var focusable = this.getFocusAble();
 			if(this.focusedID < focusable.length){
 				focusable[this.focusedID].myfocus();
-				console.log(' focusing from=> ',this.nodeName,' To=> ' , focusable[this.focusedID].nodeName)
+				//console.log('focusing from=> ',this.nodeName,' To=> ' , focusable[this.focusedID].nodeName)
 				return false;
 			}else{
 				if(typeof this.onleaving === 'function'){
 					return this.onleaving();
 				}
-				console.log('nothing else to focus...giving up',this.nodeName);
+				//console.log('nothing else to focus...giving up',this.nodeName);
 				return true;
 			}
 		};
@@ -144,7 +144,10 @@ color:blue;
 </style>
 </head>
 <body>
+<!--
+all is done trougth javascript
 
+-->
 
 <!--
 
