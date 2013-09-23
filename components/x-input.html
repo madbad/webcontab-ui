@@ -1,13 +1,11 @@
 <polymer-element name="x-input" attributes="value type maxlength size">
 	<template>
     <style>
-	
-			input:focus {
-				border-color:orange;
-    outline: none;
-    box-shadow: 0 0 10px orange;
-			}
-
+		input:focus {
+			border-color:orange;
+			outline: none;
+			box-shadow: 0 0 10px orange;
+		}
 	</style>
 		<input type="{{type}}" value="{{value}}" maxlength="{{maxlength}}" size="{{size}}">
 	</template>

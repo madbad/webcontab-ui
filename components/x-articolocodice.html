@@ -8,8 +8,35 @@
 	<script>
 	Polymer('x-articolocodice', {
 		value: '',
+		created: function (){
+			//manage keyboard events
+			$(this).keydown(function(event) {
+				switch (event.which){
+					case 112: 
+						this.getHelp();
+						event.preventDefault();
+						event.stopPropagation();
+						break;
+				}
+			});
+		},
+		
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('x-input').myfocus();
+			setTimeout(function (){
+				this.webkitShadowRoot.querySelector('x-input').myfocus();
+			}.bind(this), 50);
+		},
+		getHelp: function (){
+			console.log('delivering help');
+			var helpWindow = document.createElement('x-query-window');
+			helpWindow.params='{"_type":"articolo","codice":["!=",""]}';
+			this.webkitShadowRoot.appendChild(helpWindow);
+			helpWindow.onConfirm = function (selection){
+				//set the new selected value
+				this.webkitShadowRoot.querySelector('x-input').webkitShadowRoot.querySelector('input').value=selection.codice;
+				//I have to manually call the onchange method
+				this.webkitShadowRoot.querySelector('x-input').webkitShadowRoot.querySelector('input').onchange();
+			}.bind(this);
 		}
 	});
 	</script>
