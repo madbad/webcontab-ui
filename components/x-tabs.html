@@ -72,7 +72,7 @@
 						menu.webkitShadowRoot.querySelector('x-window').setPosition(this.webkitShadowRoot.querySelector('#pannels'), 'TL', 'TL');
 						this.webkitShadowRoot.appendChild(menu);
 
-						menu.onconfirm = function (selection){
+						menu.onConfirm = function (selection){
 							this.selectByLabel(selection.menu);
 						}.bind(this);
 						
