@@ -69,12 +69,23 @@
 				//console.log(msg);
 				//
 				var jsonList = $.parseJSON(msg);
-				this.jsonToTable(jsonList);
+				this.jsonToTable(jsonList, $.parseJSON(this.params));
 			}
 		});
 	},
 	
-	jsonToTable : function (list){
+	jsonToTable : function (list, params){
+	
+/*helper function*/
+function toObject(arr) {
+  var rv = {};
+  for (var i = 0; i < arr.length; ++i)
+    if (arr[i] !== undefined) rv[arr[i]] = '';
+  return rv;
+}
+/*helper function end*/
+	
+		
 		//console.log('STO CREANDO LA TABELLA')
 		for (var i=0; i < list.length; i++){
 			//creo le colonne
@@ -84,10 +95,21 @@
 				var row = document.createElement('tr');
 				table.appendChild(row);
 
-				//creo una intestazione per ogni proprieta dell'oggetto /*todo nascondi propietà nascoste (quelle che iniziano con "_" )*/
-				for (prop in list[i]){
-					row.innerHTML+='<th>'+prop+'</th>';
+				/*decido quali colonne mostrare dei dati che mi hanno dato, se non mi è stato specificato niente le mostro tutte quelle contenute nei dati*/
+				columns = list[i]; 
+				if(params){
+					if(params.hasOwnProperty('_select')){
+						if(params._select!=''){
+							columns = toObject(params._select.split(','));
+						}
+					}
 				}
+				
+				//creo una intestazione per ogni proprieta/colonna da mostrare
+				for (prop in columns){
+					row.innerHTML+='<th>'+prop+'</th>';
+				}				
+	
 				//mi ricordo la lista degli oggetto
 				table.list = list;
 			}
@@ -100,7 +122,7 @@
 
 			
 			//con tutti i campi
-			for (prop in list[i]){
+			for (prop in columns){
 				MyRow.innerHTML+='<td>'+list[i][prop]+'</td>';
 			}
 			table.appendChild(MyRow);

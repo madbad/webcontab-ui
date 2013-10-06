@@ -1,12 +1,9 @@
-<polymer-element name="x-vettorecodice" attributes="value">
+<polymer-element name="x-fornitorecodice" attributes="value">
 	<template>
-		<label>
-			Vettore
-			<x-input type="text" value="{{value}}"  maxlength="5" size="5"></x-input>
-		</label>
+		<x-input type="text" value="{{value}}"  maxlength="5" size="5"></x-input>
 	</template>
 	<script>
-	Polymer('x-vettorecodice', {
+	Polymer('x-fornitorecodice', {
 		value: '',
 		created: function (){
 			//manage keyboard events
@@ -30,7 +27,7 @@
 		getHelp: function (){
 			console.log('delivering help');
 			var helpWindow = document.createElement('x-query-window');
-			helpWindow.params='{"_type":"vettore","codice":["!=",""],"_select":"codice,ragionesociale"}';
+			helpWindow.params='{"_type":"ClienteFornitore","codice":["!=",""],"_select":"codice,ragionesociale"}';
 			this.webkitShadowRoot.appendChild(helpWindow);
 			helpWindow.onConfirm = function (selection){
 				//set the new selected value

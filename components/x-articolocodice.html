@@ -26,10 +26,11 @@
 				this.webkitShadowRoot.querySelector('x-input').myfocus();
 			}.bind(this), 50);
 		},
+		
 		getHelp: function (){
 			console.log('delivering help');
 			var helpWindow = document.createElement('x-query-window');
-			helpWindow.params='{"_type":"articolo","codice":["!=",""]}';
+			helpWindow.params='{"_type":"articolo","codice":["!=",""],"_select":"codice,descrizione"}';
 			this.webkitShadowRoot.appendChild(helpWindow);
 			helpWindow.onConfirm = function (selection){
 				//set the new selected value
