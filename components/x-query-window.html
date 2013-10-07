@@ -33,6 +33,13 @@
 			box-shadow: 0 0 10px orange;
 			background-color: orange;
 		  }
+		   .hidden {
+				width: 0px;
+				height: 0px;
+				visibility:hidden;
+				display:none;
+				overflow:hidden;
+			}
 		</style>
 		<x-window title="Seleziona un elemento..."></x-window>
 
@@ -84,13 +91,14 @@ function toObject(arr) {
   return rv;
 }
 /*helper function end*/
-	
-		
+
+
 		//console.log('STO CREANDO LA TABELLA')
 		for (var i=0; i < list.length; i++){
 			//creo le colonne
 			if(i==0){
 				var table = document.createElement('table');
+				table.elementsPerPage = 10;
 				table.tabIndex=0;
 				var row = document.createElement('tr');
 				table.appendChild(row);
@@ -136,7 +144,13 @@ function toObject(arr) {
 			if (this.selected != null){
 				this.querySelector('#r'+this.selected).classList.toggle('selected');
 			}
-			
+		
+			//nascondo la vecchia pagina
+			this.hidePage(this.getCurPage());
+
+			//mostro la nuova
+			this.showPage(this.getPageOfTheElement(id));
+
 			//seleziona il nuovo elemento
 			this.querySelector('#r'+id).classList.toggle('selected');
 			//this.querySelector('#r'+id).focus();
@@ -164,7 +178,56 @@ function toObject(arr) {
 		table.getSelection = function (){
 			//return the currentli selected object
 			return this.list[this.selected];
+		};
+		
+		table.showPage = function (pageNum){
+			var showFrom = ((pageNum-1) * this.elementsPerPage);
+			var showTo = pageNum * this.elementsPerPage-1;
+			//console.log('==Showing==');
+			//console.log('From: '+showFrom);
+			//console.log('To: '+showTo);
+			//hide the prev page
+			for (var i=showFrom; i <= showTo; i++){
+					//console.log('try to show: ' +i);
+				if(i >=0 && i <this.length() ){
+					//console.log('ok');
+					this.querySelector('#r'+i).classList.remove('hidden');			
+				}
+			}		
+		};
+		table.hidePage = function (pageNum){
+			var hideFrom = ((pageNum-1) * this.elementsPerPage);
+			var hideTo = pageNum * this.elementsPerPage-1;
+			//console.log('==Hiding==');
+			//console.log('From: '+hideFrom);
+			//console.log('To: '+hideTo);
+			//hide the prev page
+			for (var i=hideFrom; i <= hideTo; i++){
+					//console.log('try to hide: ' +i);
+				if(i >=0 && i <this.length() ){
+					//console.log('ok');
+					this.querySelector('#r'+i).classList.add('hidden');			
+				}
+			}		
+		};
+		table.getCurPage = function (){
+			return parseInt((this.selected | 1)/this.elementsPerPage)+1;
+		};
+		table.getPagesNumber = function (){
+			return parseInt(this.length()/this.elementsPerPage)+1;
+		};
+		table.getPageOfTheElement = function (element){
+			return parseInt(element/this.elementsPerPage)+1;
+		};
+		table.hideAllPages = function (){
+			var pages = this.getPagesNumber();
+			for (var i=1; i <= pages; i++){
+				this.hidePage(i);
+			}
 		}
+		
+		//nascondo tutte le pagine
+		table.hideAllPages();
 		//di default seleziono la prima riga /*todo*/ bisognerebbe selezionare l'elemento corrente
 		table.select(0);
 
