@@ -48,11 +48,45 @@
 	Polymer('x-query-window',{
 	created: function (){
 		$(this).keydown(function(event) {
+		//console.log(event.which);
 			switch (event.which){
-				case 38: this.table.prev();	break; //up
-				case 40: this.table.next();	break; //down
+				case 38: this.table.prev(); break; //up
+				case 40: this.table.next(); break; //down
 				case 13: this.confirm(); break; //enter
 				case 27: this.cancel(); break; //esc
+				case 33:
+					//se sono il primo della pagina
+					if(this.table.getFirstOfThePage() == this.table.selected){
+						//e ci sono ancora pagine disponibili prima di me
+						console.log('attualmente a pagina: '+this.table.getCurPage());
+						if(this.table.getCurPage()>0){
+							console.log('seleziono la pagina precedente');
+							console.log(this.table.getCurPage()-1);
+							//seleziono il primo della pagina precedente
+							this.table.selectFirstOfThePage(this.table.getCurPage()-1);
+						}
+					}else{
+						//seleziono il primo della pagina corrente
+						this.table.selectFirstOfThePage();
+					}
+					break; //pageUp
+				case 34:
+					//se sono l'ultimo della pagina
+					if(this.table.getLastOfThePage() == this.table.selected){
+						//e ci sono ancora pagine disponibili prima di me
+						console.log('attualmente a pagina: '+this.table.getCurPage());
+						if(this.table.getCurPage()<this.table.getPagesNumber()){
+							console.log('seleziono la pagina successiva');
+							console.log(this.table.getCurPage()+1);
+							//seleziono il primo della pagina precedente
+							this.table.selectLastOfThePage(this.table.getCurPage()+1);
+						}
+					}else{
+						//seleziono il primo della pagina corrente
+						this.table.selectLastOfThePage();
+					}
+					//pageDown
+				
 			}
 			//return false;
 		});
@@ -171,7 +205,14 @@ function toObject(arr) {
 		};
 		table.last = function (){
 			table.select(this.length());
-		};		
+		};
+		table.selectFirstOfThePage = function (page){
+			this.select(this.getFirstOfThePage(page));
+		};
+		table.selectLastOfThePage = function (page){
+			//console.log('selecting: '+element);
+			this.select(this.getLastOfThePage(page));
+		};
 		table.length = function (){
 			return this.querySelectorAll('tr').length-1;
 		};
@@ -179,6 +220,19 @@ function toObject(arr) {
 			//return the currentli selected object
 			return this.list[this.selected];
 		};
+		table.getLastOfThePage = function (page){
+			if(!page){page=this.getCurPage()-1}else{page=page-1;}
+			if((this.elementsPerPage-1) > this.length()){pageElement=this.length()-1}else{pageElement=this.elementsPerPage-1 }
+			var element = (page * this.elementsPerPage) + pageElement;
+			return element;
+		}
+
+		table.getFirstOfThePage = function (page){
+			if(!page){page=this.getCurPage()-1}else{page=page-1;}
+			var element = (page * this.elementsPerPage);
+			return element;
+		}
+
 		
 		table.showPage = function (pageNum){
 			var showFrom = ((pageNum-1) * this.elementsPerPage);
