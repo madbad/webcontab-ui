@@ -1,0 +1,23 @@
+<!--
+Copyright 2013 The Polymer Authors. All rights reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file.
+-->
+<script src="marked.min.js"></script>
+<polymer-element name="marked-js" attributes="text">
+  <script>
+    Polymer('marked-js', {
+      text: '',
+      allowAuthorStyles: true,
+      enteredDocument: function() {
+        if (!this.text) {
+          this.text = this.textContent;
+        }
+      },
+      textChanged: function () {
+        this.innerHTML = marked(this.text.replace(/\\n/g, '\n'));
+      }
+    });
+  </script>
+</polymer-element>
+
