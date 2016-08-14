@@ -1,4 +1,4 @@
-<polymer-element name="x-articolocodice" attributes="value">
+<dom-module id="x-articolocodice" attributes="value">
 	<template>
 		<label>
 			Art.
@@ -6,9 +6,10 @@
 		</label>
 	</template>
 	<script>
-	Polymer('x-articolocodice', {
+	Polymer({
+		is:'x-articolocodice',
 		value: '',
-		created: function (){
+		ready: function (){
 			//manage keyboard events
 			$(this).keydown(function(event) {
 				switch (event.which){
@@ -23,7 +24,7 @@
 		
 		myfocus: function (){
 			setTimeout(function (){
-				this.webkitShadowRoot.querySelector('x-input').myfocus();
+				Polymer.dom(this.root).querySelector('x-input').myfocus();
 			}.bind(this), 50);
 		},
 		
@@ -31,14 +32,14 @@
 			console.log('delivering help');
 			var helpWindow = document.createElement('x-query-window');
 			helpWindow.params='{"_type":"articolo","codice":["!=",""],"_select":"codice,descrizione"}';
-			this.webkitShadowRoot.appendChild(helpWindow);
+			Polymer.dom(this.root).appendChild(helpWindow);
 			helpWindow.onConfirm = function (selection){
 				//set the new selected value
-				this.webkitShadowRoot.querySelector('x-input').webkitShadowRoot.querySelector('input').value=selection.codice;
+				shadowQuerySelector(this, ['x-input','input']).value=selection.codice;
 				//I have to manually call the onchange method
-				this.webkitShadowRoot.querySelector('x-input').webkitShadowRoot.querySelector('input').onchange();
+				shadowQuerySelector(this, ['x-input','input']).onchange();
 			}.bind(this);
 		}
 	});
 	</script>
-</polymer-element>
+</dom-module>

@@ -1,4 +1,4 @@
-<polymer-element name="x-ddtselezione" attributes="numero data fornitore causale">
+<dom-module id="x-ddtselezione" attributes="numero data fornitore causale">
 	<template>
 		<x-numero label="Numero"></x-numero>
 		<x-data></x-data>
@@ -8,7 +8,8 @@
 		<x-causale></x-causale>
 	</template>
 	<script>
-	Polymer('x-ddtselezione',{
+	Polymer({
+		is:'x-ddtselezione',
 		numeroChanged: function (){
 			console.log('numero changed');
 		},
@@ -22,7 +23,7 @@
 				}
 			});
 			/*focus management*/
-			this.focusAbleContainer = this.webkitShadowRoot;
+			this.focusAbleContainer = this.root;
 		},
 		/*focus management*/
 		focusedID: -1,
@@ -31,4 +32,4 @@
 		getFocusAble : getFocusAble,
 	});
 	</script>
-</polymer-element>
+</dom-module>

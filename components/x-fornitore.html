@@ -1,4 +1,4 @@
-<polymer-element name="x-fornitore" attributes="value">
+<dom-module id="x-fornitore" attributes="value">
 	<template>
 
 			Codice
@@ -7,20 +7,20 @@
 			<x-fornitoreragionesociale></x-fornitoreragionesociale>
 	</template>
 	<script>
-	Polymer('x-fornitore', {
+	Polymer({
+		is:'x-fornitore', 
 		_type: 'clientefornitore',
 		value: '',
-		created: function (){
-
-			this.codice = this.webkitShadowRoot.querySelector('x-fornitorecodice').webkitShadowRoot.querySelector('x-input').webkitShadowRoot.querySelector('input');
-			this.ragionesociale =  this.webkitShadowRoot.querySelector('x-fornitoreragionesociale').webkitShadowRoot.querySelector('x-input').webkitShadowRoot.querySelector('input');
+		ready: function (){
+			this.codice = shadowQuerySelector(this, ['x-fornitorecodice','x-input','input']);
+			this.ragionesociale = shadowQuerySelector(this, ['x-fornitoreragionesociale','x-input','input']);
 
 			// when the "codice input" change call my "oncodechange" method
 			// faccio questo passamano 
 			//perchè se operassi direttamente nel metodo onchange dell'input 
 			//perdo i riferimenti ad alcune proprietà di x-fornitore che mi servono
 			this.codice.onchange = function (){
-				//console.log('the input has changed');		
+				//console.log('the input has changed');
 				//call the x-fornitore oncodechange function  
 				this.oncodechange();
 			}.bind(this);
@@ -61,7 +61,7 @@
 				}
 			});
 			/*focus management*/
-			this.focusAbleContainer = this.webkitShadowRoot;
+			this.focusAbleContainer = this.root;
 		},
 		/*focus management*/
 		focusedID: -1,
@@ -70,4 +70,4 @@
 		getFocusAble : getFocusAble,
 	});
 	</script>
-</polymer-element>
+</dom-module>

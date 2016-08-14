@@ -1,16 +1,28 @@
 <!doctype html>
 <html>
 <head>
-	
- <script src="./polymer/polymer-v0.0.20130905.min.js" log=""></script>
- <script src="./jquery.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- Polyfill Web Components support for older browsers -->
+	<script src="./webcomponentsjs/webcomponents-lite.js"></script>
+	<link rel="import" href="./polymer/polymer.html">
+	<script src="./jquery.min.js"></script>
 	<script>
-	var test='aaaa';
+		function shadowQuerySelector(htmlElement, strArray){
+		//console.log(strArray);
+			for (var i=0; i < strArray.length; i++){
+				var string = strArray[i];
+				//console.log(i,'==>', strArray.length);
+				//console.log(htmlElement,'==>', string);
+				htmlElement = Polymer.dom(htmlElement.root).querySelector(string);
+			}
+			return htmlElement;
+		}
+		
 		$(document.body).keydown(function(event) {
 			console.log(event.which);
 			console.log(event.currentTarget.nodeName);
 		});
-	
+
 		function filter (elementsArray){
 			var notAllowed = " BR HR X-RIGHE ";
 			var filtered = [];
@@ -28,23 +40,27 @@
 			}
 			return filtered;
 		};
-		var myfocus= function (){
+		var myfocus = function (){
 			//alert('received fosus:'+this.nodeName);
 			//console.log('received focus ',this.nodeName, this);
 			//reset the current status
 			this.focusedID = -1;
 			this.focusNext();
 		};
-		var focusNext= function () {
+		var focusNext = function () {
 
 			//console.log('focus management is now assigned to: '+this.nodeName);
 			//console.log(this.nodeName);
 
 			this.focusedID = this.focusedID + 1;
 			var focusable = this.getFocusAble();
+console.log('this       ===>',this);
+console.log('focusables ===>',focusable);
 			if(this.focusedID < focusable.length){
+console.log('focuseid   ===>',this.focusedID);
+console.log('tobefocused===>',focusable[this.focusedID]);
 				focusable[this.focusedID].myfocus();
-				//console.log('focusing from=> ',this.nodeName,' To=> ' , focusable[this.focusedID].nodeName)
+				console.log('focusing from=> ',this.nodeName,' To=> ' , focusable[this.focusedID].nodeName)
 				return false;
 			}else{
 				if(typeof this.onleaving === 'function'){
@@ -55,14 +71,13 @@
 			}
 		};
 		var getFocusAble = function (){
-			element = this.focusAbleContainer;
+			var element = this.focusAbleContainer;
 			var childrens = filter(element.children);
 			return childrens;
 		}
 
-		/*
-			Recusively up-traverse the "dom" (and the "shadowdom") to get the relative position of an element from the document body.
-		*/
+		//Recusively up-traverse the "dom" (and the "shadowdom") to get the relative position of an element from the document body.
+		
 		var getOffset = function (el, callback, offset){
 			if(offset === undefined){
 				offset = {top:0,left:0}
@@ -80,17 +95,12 @@
 				return;
 			}
 		}
-
+		
+		window.addEventListener('WebComponentsReady', function() {
+			document.body.style.opacity = 1; // show body now that registration is done.
+			document.body.innerHTML += '<x-ddt></x-ddt>'
+		});
 	</script>
-
-	  <script>
-    window.addEventListener('WebComponentsReady', function() {
-      document.body.style.opacity = 1; // show body now that registration is done.
-
-      document.body.innerHTML = '<x-ddt></x-ddt>'
-    });
-	</script>
-	
 	
 	<?php
 	$testAllComponents='';
@@ -98,17 +108,16 @@
 		global $testAllComponents;
 			// create a handler for the directory
 			$handler = opendir($dir);
-
+			
 			// open directory and walk through the filenames
 			while ($file = readdir($handler)) {
 				if (strpos($file, '.html')) {
 					echo "\n".'<link rel="import" href="./'.$dir.'/'.$file.'">';
 					$testAllComponents.= "\n<br><br><br><br><br><hr>".$file."<br> <".str_replace('.html','',$file).'></'.str_replace('.html','',$file).'>';
 				}
-			}		
+			}
 		};
 		
-
 		loadComponentsFromDir('components');
 		//loadComponentsFromDir('toolkit/components');
 	?>
@@ -144,29 +153,7 @@ color:blue;
 </style>
 </head>
 <body>
-<!--
-all is done trougth javascript
 
--->
-
-<!--
-
-<x-ddt></x-ddt>
-
-<x-query-window></x-query-window>
-<x-query-window params='{"_type":"causalispedizione","codice":["!=",""]}'><x-query-window>;
-<x-window title="My window">
-<x-menu>
-	<x-menuitem>111</x-menuitem>
-	<x-menuitem>111</x-menuitem>
-	<x-menuitem>111</x-menuitem>
-	<x-menuitem>111</x-menuitem>
-	<x-menuitem>111</x-menuitem>
-	<x-menuitem>111</x-menuitem>
-	
-</x-menu>
-</x-window>
--->
 <?php
 //echo $testAllComponents;
 ?>

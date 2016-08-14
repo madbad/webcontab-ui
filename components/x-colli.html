@@ -1,4 +1,4 @@
-<polymer-element name="x-colli" attributes="value">
+<dom-module id="x-colli" attributes="value">
 	<template>
 		<label>
 			Colli
@@ -6,13 +6,14 @@
 		</label>
 	</template>
 	<script>
-	Polymer('x-colli', {
+	Polymer({
+		is:'x-colli', 
 		value: '',
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('x-input').myfocus();
+			Polymer.dom(this.root).querySelector('x-input').myfocus();
 		}		
 	});
 	</script>
-</polymer-element>
+</dom-module>
 
 

@@ -1,4 +1,4 @@
-<polymer-element name="x-tabs">
+<dom-module id="x-tabs">
 	<template>
 		<style>
 		  .labels{
@@ -40,7 +40,8 @@
 		</div>
 	</template>
 	<script>
-    Polymer('x-tabs', {
+    Polymer({
+	is:'x-tabs', 
 		uiOnly: true,
 		ready: function() {
 	  
@@ -69,8 +70,8 @@
 						var menu = document.createElement('x-query-window');
 						menu.jsonList =$.parseJSON('[{"menu":"Testata"},{"menu":"Dettaglio"},{"menu":"Stampa"}]');
 						menu.jsonToTable(menu.jsonList);
-						menu.webkitShadowRoot.querySelector('x-window').setPosition(this.webkitShadowRoot.querySelector('#pannels'), 'TL', 'TL');
-						this.webkitShadowRoot.appendChild(menu);
+						Polymer.dom(menu.root).querySelector('x-window').setPosition(Polymer.dom(this.root).querySelector('#pannels'), 'TL', 'TL');
+						Polymer.dom(menu.root).appendChild(menu);
 
 						menu.onConfirm = function (selection){
 							this.selectByLabel(selection.menu);
@@ -82,10 +83,12 @@
 					
 					//on the start i show only the firs tab
 					if(tabid==0){
-						this.children[tabid].show();
+					console.log(this.children);
+					console.log(this.children[tabid]);
+//						this.children[tabid].show();
 						this.$.labels.children[tabid].className='selected';
 					}else{
-						this.children[tabid].hide();
+//						this.children[tabid].hide();
 						this.$.labels.children[tabid].className='';
 					}
 				}
@@ -127,4 +130,4 @@
 		getFocusAble: getFocusAble,
     });
 	</script>
-</polymer-element>
+</dom-module>

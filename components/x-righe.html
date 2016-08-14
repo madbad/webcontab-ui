@@ -1,9 +1,10 @@
-<polymer-element name="x-righe" attributes="value">
+<dom-module id="x-righe" attributes="value">
 	<template>
 		<!--<x-riga></x-riga>-->
 	</template>
 	<script>
-	Polymer('x-righe', {
+	Polymer({
+		is:'x-righe', 
 		value: '',
 		valueChanged: function (){
 			//console.log(this.nodeName+' changed');
@@ -14,12 +15,12 @@
 			for (var i =0; i < righe.length; i++){
 				var riga = righe[i];
 				var newRiga = document.createElement('x-riga');
-				this.webkitShadowRoot.appendChild(newRiga);
+				Polymer.dom(this.root).appendChild(newRiga);
 				newRiga.value = riga;
 			}
 		}
 	});
 	</script>
-</polymer-element>
+</dom-module>
 
 

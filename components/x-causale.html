@@ -1,4 +1,4 @@
-<polymer-element name="x-causale" attributes="value">
+<dom-module id="x-causale" attributes="value">
 	<template>
 		<label>
 			Causale
@@ -6,11 +6,12 @@
 		</label>
 	</template>
 	<script>
-	Polymer('x-causale', {
+	Polymer({
+		is:'x-causale', 
 		value: '',
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('x-input').myfocus();
+			Polymer.dom(this.root).querySelector('x-input').myfocus();
 		}
 	});
 	</script>
-</polymer-element>
+</dom-module>

@@ -1,16 +1,17 @@
-<polymer-element name="x-imballaggio" attributes="value">
+<dom-module id="x-imballaggio" attributes="value">
 	<template>
 		<x-imballaggiocodice value="{{value}}"></x-imballaggiocodice>
 		<x-imballaggiodescrizione></x-imballaggiodescrizione>
 	</template>
 	<script>
-	Polymer('x-imballaggio', {
+	Polymer({
+		is:'x-imballaggio', 
 		value: '',
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('x-imballaggiocodice').myfocus();
+			Polymer.dom(this.root).querySelector('x-imballaggiocodice').myfocus();
 		}
 	});
 	</script>
-</polymer-element>
+</dom-module>
 
 

@@ -1,4 +1,4 @@
-<polymer-element name="x-data" attributes="value">
+<dom-module id="x-data" attributes="value">
 	<template>
 		<label>
 			Data
@@ -6,10 +6,11 @@
 		</label>
 	</template>
 	<script>
-	Polymer('x-data', {
+	Polymer({
+		is:'x-data', 
 		value: new Date().toJSON().slice(0,10),
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('x-input').myfocus();
+			Polymer.dom(this.root).querySelector('x-input').myfocus();
 		},
 		/*
 		valueChanged: function (){
@@ -19,6 +20,6 @@
 		*/
 	});
 	</script>
-</polymer-element>
+</dom-module>
 
 

@@ -1,12 +1,12 @@
-<polymer-element name="x-ddt">
+<dom-module id="x-ddt">
 	<template>
 		<x-window title="Gestione Ddt">
-				<x-ddtselezione></x-ddtselezione>
+				<x-ddtselezione id="test"></x-ddtselezione>
 				
 				<x-tabs>
 						<x-pannel title="Testata">
 							<br><x-spedizione></x-spedizione>
-							<br><x-vettore></x-vettore>			   
+							<br><x-vettore></x-vettore>
 						</x-pannel>
 						<x-pannel title="Dettaglio">
 							<x-righe>ppppp</x-righe>
@@ -18,10 +18,11 @@
 							- Note
 						</x-pannel>
 				</x-tabs>
-		</x-window>	
+		</x-window>
 	</template>
 	<script>
-	Polymer('x-ddt',{
+	Polymer({
+	is:'x-ddt',
 	get : function (){
 
 		/*perform an ajax request to get the ddt*/
@@ -56,22 +57,24 @@
 		});
 
 	},
-	created: function (){
+	ready: function (){
 		ddt = this;
 		/*map some property to the html elements*/
 		this._type = {value:''};
-		this.cod_mezzo = this.webkitShadowRoot.querySelector('x-spedizione').codice;
-		this.cod_vettore = this.webkitShadowRoot.querySelector('x-vettore').codice;
+
+		this.cod_mezzo = Polymer.dom(this.root).querySelector('x-spedizione').codice;
+		this.cod_vettore = Polymer.dom(this.root).querySelector('x-vettore').codice;
 		
-		this.cod_destinatario = this.webkitShadowRoot.querySelector('x-ddtselezione').webkitShadowRoot.querySelector('x-fornitore').codice;
+		this.cod_destinatario = shadowQuerySelector(this, ['x-ddtselezione','x-fornitore']).codice;
 		this.cod_destinazione = {value:''};
-		this.data =   this.webkitShadowRoot.querySelector('x-ddtselezione').webkitShadowRoot.querySelector('x-data');
-		this.numero =  this.webkitShadowRoot.querySelector('x-ddtselezione').webkitShadowRoot.querySelector('x-numero');
-		this.cod_causale =  this.webkitShadowRoot.querySelector('x-ddtselezione').webkitShadowRoot.querySelector('x-causale');
+		this.data =   shadowQuerySelector(this, ['x-ddtselezione','x-data']);
+		this.numero =  shadowQuerySelector(this, ['x-ddtselezione','x-numero']);
+		this.cod_causale = shadowQuerySelector(this, ['x-ddtselezione','x-causale']);
 		this.fattura_data = {value:''};
 		this.fattura_numero = {value:''};
 
-		this.righe = this.webkitShadowRoot.querySelector('x-tabs').querySelector('x-righe');
+		this.righe = Polymer.dom(this.root).querySelector('x-tabs').querySelector('x-righe');
+
 		this.tot_colli = {value:''};
 		this.tot_peso = {value:''};
 		this.valuta = {value:''};
@@ -96,7 +99,7 @@
 			/*
 				case 112: 
 					//console.log(event.which);
-					this.webkitShadowRoot.innerHTML +='<x-query-window params=\'{"_type":"causalispedizione","codice":["!=",""]}\'><x-query-window>';
+					Polymer.dom(this.root).innerHTML +='<x-query-window params=\'{"_type":"causalispedizione","codice":["!=",""]}\'><x-query-window>';
 					event.preventDefault();
 					event.stopPropagation();
 					break;
@@ -107,15 +110,22 @@
 			}
 		});
 		/*focus management*/
-		this.focusAbleContainer = this.webkitShadowRoot.querySelector('x-window');
+		console.log(this.root);
+		console.log(Polymer.dom(this.root).querySelector('x-window'));
+		console.log(this.$$('x-window'));
+		
+		//this.focusAbleContainer = Polymer.dom(this.root).querySelector('x-window');
+		this.focusAbleContainer = this;
 		
 		this.myfocus();
 	},
-		/*focus management*/
+
+		//focus management
 		focusedID: -1,
 		myfocus: myfocus,
 		focusNext: focusNext,
 		getFocusAble : getFocusAble,
+
 	});	
 	</script>
-</polymer-element>
+</dom-module>

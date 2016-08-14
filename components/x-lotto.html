@@ -1,4 +1,4 @@
-<polymer-element name="x-lotto" attributes="value">
+<dom-module id="x-lotto" attributes="value">
 	<template>
 		<label>
 			Lotto
@@ -6,13 +6,14 @@
 		</label>
 	</template>
 	<script>
-	Polymer('x-lotto', {
+	Polymer({
+		is:'x-lotto', 
 		value: '',
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('x-input').myfocus();
+			Polymer.dom(this.root).querySelector('x-input').myfocus();
 		}
 	});
 	</script>
-</polymer-element>
+</dom-module>
 
 

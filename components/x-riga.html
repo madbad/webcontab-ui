@@ -1,4 +1,4 @@
-<polymer-element name="x-riga" attributes="value">
+<dom-module id="x-riga" attributes="value">
     <style>
 		@host{
 			* {
@@ -26,19 +26,20 @@
 		</div>
 	</template>
 	<script>
-	Polymer('x-riga', {
+	Polymer({
+		is:'x-riga', 
 		value: '',
-		created: function (){
+		ready: function (){
 			this._type = {value:''};
-			this.cod_articolo= this.webkitShadowRoot.querySelector('x-articolo').webkitShadowRoot.querySelector('x-articolocodice');
-			this.colli= this.webkitShadowRoot.querySelector('x-colli');
-			this.descrizione= this.webkitShadowRoot.querySelector('x-articolo').webkitShadowRoot.querySelector('x-articolodescrizione');
-			this.numero= this.webkitShadowRoot.querySelector('x-numero'); 
-			this.peso_lordo= this.webkitShadowRoot.querySelector('x-pesolordo').webkitShadowRoot.querySelector('x-numero');
-			this.peso_netto= this.webkitShadowRoot.querySelector('x-pesonetto').webkitShadowRoot.querySelector('x-numero');
-			this.prezzo= this.webkitShadowRoot.querySelector('x-prezzo');
-			this.unita_misura= this.webkitShadowRoot.querySelector('x-um');
-			this.cod_iva =  this.webkitShadowRoot.querySelector('x-articoloiva');
+			this.cod_articolo = shadowQuerySelector(this, ['x-articolo','x-articolocodice']);
+			this.colli = Polymer.dom(this.root).querySelector('x-colli');
+			this.descrizione = shadowQuerySelector(this, ['x-articolo','x-articolodescrizione']);
+			this.numero = Polymer.dom(this.root).querySelector('x-numero'); 
+			this.peso_lordo = shadowQuerySelector(this, ['x-pesolordo','x-numero']);
+			this.peso_netto = shadowQuerySelector(this, ['x-pesonetto','x-numero']);
+			this.prezzo = Polymer.dom(this.root).querySelector('x-prezzo');
+			this.unita_misura = Polymer.dom(this.root).querySelector('x-um');
+			this.cod_iva =  Polymer.dom(this.root).querySelector('x-articoloiva');
 			
 			//manage keyboard events
 			$(this).keydown(function(event) {
@@ -50,7 +51,7 @@
 			});
 			
 			/*focus management*/
-			this.focusAbleContainer = this.webkitShadowRoot.querySelector('div');
+			this.focusAbleContainer = Polymer.dom(this.root).querySelector('div');
 		},
 		valueChanged: function (){
 			//console.log(this.nodeName+' changed');
@@ -69,7 +70,7 @@
 						this[prop].value = riga[prop].codice;
 					}
 				}else{
-					if (this.hasOwnProperty(prop)){					
+					if (this.hasOwnProperty(prop)){
 						this[prop].value = riga[prop];
 					}
 				}
@@ -82,6 +83,6 @@
 		getFocusAble : getFocusAble,
 	});
 	</script>
-</polymer-element>
+</dom-module>
 
 

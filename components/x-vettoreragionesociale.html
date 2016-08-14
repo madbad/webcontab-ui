@@ -1,4 +1,4 @@
-<polymer-element name="x-vettoreragionesociale">
+<dom-module id="x-vettoreragionesociale">
 	<template>
 		<label>
 			Descr.
@@ -6,11 +6,12 @@
 		</label>
 	</template>
 	<script>
-	Polymer('x-vettoreragionesociale', {
+	Polymer({
+		is:'x-vettoreragionesociale', 
 		value: '',
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('x-input').myfocus();
+			Polymer.dom(this.root).querySelector('x-input').myfocus();
 		}
 	});
 	</script>
-</polymer-element>
+</dom-module>

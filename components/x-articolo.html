@@ -1,23 +1,23 @@
-<polymer-element name="x-articolo"  attributes="value">
+<dom-module id="x-articolo"  attributes="value">
 	<template>
 		<x-articolocodice  value="{{value}}"></x-articolocodice>
 		<x-articolodescrizione></x-articolodescrizione>
 	</template>
 	<script>
-	Polymer('x-articolo', {
+	Polymer({
+		is:'x-articolo',
 		_type: 'articolo',
 		value: '',
-		created: function (){
+		ready: function (){
 
-			this.codice = this.webkitShadowRoot.querySelector('x-articolocodice').webkitShadowRoot.querySelector('x-input').webkitShadowRoot.querySelector('input');
-			this.descrizione =  this.webkitShadowRoot.querySelector('x-articolodescrizione').webkitShadowRoot.querySelector('x-input').webkitShadowRoot.querySelector('input');
-
+			this.codice = shadowQuerySelector(this, ['x-articolocodice', 'x-input', 'input']);
+			this.descrizione = shadowQuerySelector(this, ['x-articolodescrizione','x-input','input']);
 			// when the "codice input" change call my "oncodechange" method
 			// faccio questo passamano 
 			//perchè se operassi direttamente nel metodo onchange dell'input 
 			//perdo i riferimenti ad alcune proprietà di x-fornitore che mi servono
 			this.codice.onchange = function (){
-				console.log('the input has changed');		
+				console.log('the input has changed');
 				//call the x-fornitore oncodechange function  
 				this.oncodechange();
 			}.bind(this);
@@ -47,8 +47,8 @@
 					}else{
 						console.log('Non trovato: '+this._type+' = '+this.value);
 					}
-				});				
-			};	
+				});
+			};
 			//manage keyboard events
 			$(this).keydown(function(event) {
 				switch (event.which){
@@ -58,7 +58,7 @@
 				}
 			});
 			/*focus management*/
-			this.focusAbleContainer = this.webkitShadowRoot;
+			this.focusAbleContainer = this.root;
 		},
 		/*focus management*/
 		focusedID: -1,
@@ -67,6 +67,6 @@
 		getFocusAble : getFocusAble,
 	});
 	</script>
-</polymer-element>
+</dom-module>
 
 

@@ -1,4 +1,4 @@
-<polymer-element name="x-um">
+<dom-module id="x-um">
 	<template>
 		<label>
 			UM
@@ -6,13 +6,14 @@
 		</label>
 	</template>
 	<script>
-	Polymer('x-um', {
+	Polymer({
+		is:'x-um', 
 		value: '',
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('x-input').myfocus();
+			Polymer.dom(this.root).querySelector('x-input').myfocus();
 		}
 	});
 	</script>
-</polymer-element>
+</dom-module>
 
 

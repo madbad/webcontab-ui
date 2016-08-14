@@ -1,4 +1,4 @@
-<polymer-element name="x-menu">
+<dom-module id="x-menu">
 	<template>
 		<style>
 		  .menu {
@@ -18,9 +18,9 @@
 		</div>
 	</template>
 	<script>
-	Polymer('x-menu',{
-		
-		created: function (){
+	Polymer({
+		is:'x-menu',
+		ready: function (){
 			this.tabIndex = 0;
 		console.log('x-menu has been activated')
 			this.myfocus();
@@ -49,10 +49,10 @@
 		myfocus: function (){
 			setTimeout(function (){
 				console.log('the focus is now on the menu')
-				this.webkitShadowRoot.querySelector('div').focus();
+				Polymer.dom(this.root).querySelector('div').focus();
 			}.bind(this), 1);
 		}
 
 });
 	</script>
-</polymer-element>
+</dom-module>

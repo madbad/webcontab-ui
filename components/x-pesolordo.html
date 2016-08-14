@@ -1,15 +1,16 @@
-<polymer-element name="x-pesolordo">
+<dom-module id="x-pesolordo">
 	<template>
 		<x-numero interi="6" decimali="2" label="P.Lordo">{{value}}</x-numero>
 	</template>
 	<script>
-	Polymer('x-pesolordo', {
+	Polymer({
+		is:'x-pesolordo', 
 		value: '',
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('x-numero').myfocus();
+			Polymer.dom(this.root).querySelector('x-numero').myfocus();
 		}
 	});
 	</script>
-</polymer-element>
+</dom-module>
 
 

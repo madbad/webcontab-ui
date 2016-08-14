@@ -1,4 +1,4 @@
-<polymer-element name="x-numero" attributes="decimali interi totalecaratteri label value">
+<dom-module id="x-numero" attributes="decimali interi totalecaratteri label value">
 	<template>
 	<label>
 		{{label}}
@@ -6,24 +6,25 @@
 	</label>
 	</template>
 	<script>
-	Polymer('x-numero', {
+	Polymer({
+		is:'x-numero', 
 		decimali: 0,
 		interi: 8,
 		totalecaratteri:0,
 		label:'',
 		//value:'',
-		created: function (){
+		ready: function (){
 			this.tabIndex = 0;
 			if(this.decimali>0){var virgola=1;}else{var virgola=0;}
-			this.totalecaratteri = this.interi+virgola+this.decimali;		
+			this.totalecaratteri = this.interi+virgola+this.decimali;
 		},
 		myfocus: function (){
 			setTimeout(function (){
-				this.webkitShadowRoot.querySelector('x-input').myfocus();
+				Polymer.dom(this.root).querySelector('x-input').myfocus();
 			}.bind(this), 50);
 		}
 	});
 	</script>
-</polymer-element>
+</dom-module>
 
 

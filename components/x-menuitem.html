@@ -1,4 +1,4 @@
-<polymer-element name="x-menuitem" attributes="action">
+<dom-module id="x-menuitem" attributes="action">
 	<template>
 		<style>
 		  .menuitem {
@@ -17,8 +17,9 @@
 
 	</template>
 	<script>
-	Polymer('x-menuitem', {
+	Polymer({
+	is:'x-menuitem', 
 	  action: ''
 	});
 	</script>
-</polymer-element>
+</dom-module>

@@ -1,4 +1,4 @@
-<polymer-element name="x-window" attributes="title">
+<dom-module id="x-window" attributes="title">
 	<template>
 		<style>
 		.window {
@@ -22,7 +22,6 @@
 		}
 		.content{
   			padding:1em;
-			/*color: #dbdbdb;*/
 		}
 		</style>
 		<div class="window">
@@ -31,26 +30,27 @@
 		</div>
 	</template>
 	<script>
-	Polymer('x-window', {
+	Polymer({
+		is:'x-window', 
 		uiOnly: true,
 		title: '',
 		close: function (){},
 		hide: function () {},
 		minimize: function (){},
-  
-		created: function (){
+		
+		ready: function (){
 			this.myfocus();
 		},
 		setPosition: function (htmlElement, htmlElementPoint, myPoint){
-
+			
 			target = htmlElement;
-
-			this.webkitShadowRoot.querySelector('.window').style.left='110px';
-			this.webkitShadowRoot.querySelector('.window').style.top='110px';
+			
+			Polymer.dom(this.root).querySelector('.window').style.left='110px';
+			Polymer.dom(this.root).querySelector('.window').style.top='110px';
 			
 			setTimeout(getOffset, 0, target, function (position){
-				this.webkitShadowRoot.querySelector('.window').style.left=position.left+'px';
-				this.webkitShadowRoot.querySelector('.window').style.top=position.top+'px';
+				Polymer.dom(this.root).querySelector('.window').style.left=position.left+'px';
+				Polymer.dom(this.root).querySelector('.window').style.top=position.top+'px';
 			}.bind(this));
 		},
 		myfocus: function () {
@@ -60,4 +60,4 @@
 		}
 	});
 	</script>
-</polymer-element>
+</dom-module>

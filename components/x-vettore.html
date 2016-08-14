@@ -1,17 +1,18 @@
-<polymer-element name="x-vettore" attributes="value">
+<dom-module id="x-vettore" attributes="value">
 	<template>
 		<x-vettorecodice value="{{value}}"></x-vettorecodice>
-		<x-vettoreragionesociale></x-vettoreragionesociale>		
+		<x-vettoreragionesociale></x-vettoreragionesociale>
 	</template>
 	<script>
-	Polymer('x-vettore', {
+	Polymer({
+		is:'x-vettore', 
 		_type: 'vettore',
 		value: '',
-		created: function (){
-
-			this.codice = this.webkitShadowRoot.querySelector('x-vettorecodice').webkitShadowRoot.querySelector('x-input').webkitShadowRoot.querySelector('input');
-			this.ragionesociale =  this.webkitShadowRoot.querySelector('x-vettoreragionesociale').webkitShadowRoot.querySelector('x-input').webkitShadowRoot.querySelector('input');
-
+		ready: function (){
+			
+			this.codice = shadowQuerySelector(this, ['x-vettorecodice','x-input','input']);
+			this.descrizione = shadowQuerySelector(this, ['x-vettoreragionesociale','x-input','input']);
+			
 			// when the "codice input" change call my "oncodechange" method
 			// faccio questo passamano 
 			//perchè se operassi direttamente nel metodo onchange dell'input 
@@ -21,7 +22,6 @@
 				//call the x-fornitore oncodechange function  
 				this.oncodechange();
 			}.bind(this);
-			
 			
 			this.oncodechange = function (){
 				//il codice fornitore è cambiato
@@ -37,18 +37,15 @@
 					},
 					context: this,
 				}).done(function( msg ) {
-				//console.log("segue...");
-				//MYLOG2=this+'111';
-				//console.log(this.codice);
-				//console.log(msg);
+					
 					var json = $.parseJSON(msg)[this['_type']];
 					if (json.ragionesociale){
 						this.ragionesociale.value = json.ragionesociale;
 					}else{
 						console.log('Non trovato: '+this._type+' = '+this.value);
 					}
-				});				
-			};	
+				});
+			};
 			//manage keyboard events
 			$(this).keydown(function(event) {
 				switch (event.which){
@@ -58,7 +55,7 @@
 				}
 			});
 			/*focus management*/
-			this.focusAbleContainer = this.webkitShadowRoot;
+			this.focusAbleContainer = this.root;
 		},
 		/*focus management*/
 		focusedID: -1,
@@ -67,6 +64,6 @@
 		getFocusAble : getFocusAble,
 	});
 	</script>
-</polymer-element>
+</dom-module>
 
 

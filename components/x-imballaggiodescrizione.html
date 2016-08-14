@@ -1,4 +1,4 @@
-<polymer-element name="x-imballaggiodescrizione" attributes="value">
+<dom-module id="x-imballaggiodescrizione" attributes="value">
 	<template>
 		<label>
 			Descr.
@@ -6,11 +6,12 @@
 		</label>
 	</template>
 	<script>
-	Polymer('x-imballaggiodescrizione', {
+	Polymer({
+		is:'x-imballaggiodescrizione', 
 		value: '',
 		myfocus: function (){
-			this.webkitShadowRoot.querySelector('x-input').myfocus();
+			Polymer.dom(this.root).querySelector('x-input').myfocus();
 		}
 	});
 	</script>
-</polymer-element>
+</dom-module>

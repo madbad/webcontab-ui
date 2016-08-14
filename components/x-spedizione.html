@@ -1,16 +1,17 @@
-<polymer-element name="x-spedizione" attributes="value">
+<dom-module id="x-spedizione" attributes="value">
 	<template>
 		<x-spedizionecodice value="{{value}}"></x-spedizionecodice>
 		<x-spedizionedescrizione></x-spedizionedescrizione>
 	</template>
 	<script>
-	Polymer('x-spedizione', {
+	Polymer({
+	is:'x-spedizione', 
 		_type: 'causalispedizione',
 		value: '',
-		created: function (){
+		ready: function (){
 
-			this.codice = this.webkitShadowRoot.querySelector('x-spedizionecodice').webkitShadowRoot.querySelector('x-input').webkitShadowRoot.querySelector('input');
-			this.descrizione =  this.webkitShadowRoot.querySelector('x-spedizionedescrizione').webkitShadowRoot.querySelector('x-input').webkitShadowRoot.querySelector('input');
+			this.codice = shadowQuerySelector(this, ['x-spedizionecodice','x-input','input']);
+			this.descrizione = shadowQuerySelector(this, ['x-spedizionedescrizione','x-input','input']);
 
 			// when the "codice input" change call my "oncodechange" method
 			// faccio questo passamano 
@@ -54,7 +55,7 @@
 				}
 			});
 			/*focus management*/
-			this.focusAbleContainer = this.webkitShadowRoot;
+			this.focusAbleContainer = this.root;
 		},
 		/*focus management*/
 		focusedID: -1,
@@ -63,6 +64,6 @@
 		getFocusAble : getFocusAble,
 	});
 	</script>
-</polymer-element>
+</dom-module>
 
 

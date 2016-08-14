@@ -1,4 +1,4 @@
-<polymer-element name="x-input" attributes="value type maxlength size">
+<dom-module id="x-input" attributes="value type maxlength size">
 	<template>
     <style>
 		input:focus {
@@ -7,21 +7,24 @@
 			box-shadow: 0 0 10px orange;
 		}
 	</style>
-		<input type="{{type}}" value="{{value}}" maxlength="{{maxlength}}" size="{{size}}">
+		<input id="input" type="{{type}}" value="{{value}}" maxlength="{{maxlength}}" size="{{size}}">
 	</template>
 	<script>
-	Polymer('x-input', {
-		created: function (){
-			this.webkitShadowRoot.querySelector('input').onfocus = function(){
+	Polymer({
+		is:'x-input', 
+		
+		ready: function (){
+			Polymer.dom(this.root).querySelector('input').onfocus = function(){
 				this.select();
 			}
 		},
+		
 		myfocus: function () {
 			setTimeout(function (){
-				this.webkitShadowRoot.querySelector('input').focus();
+				Polymer.dom(this.root).querySelector('input').focus();
 			}.bind(this), 50);
 		}
+		
 	});
 	</script>
-	</script>
-</polymer-element>
+</dom-module>
