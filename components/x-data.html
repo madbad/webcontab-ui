@@ -1,4 +1,4 @@
-<dom-module id="x-data" attributes="value">
+<dom-module id="x-data">
 	<template>
 		<label>
 			Data
@@ -7,17 +7,23 @@
 	</template>
 	<script>
 	Polymer({
-		is:'x-data', 
-		value: new Date().toJSON().slice(0,10),
+		is:'x-data',
+		properties: {
+			value: {
+				type: String,
+				notify: true,
+				value: function(){return new Date().toJSON().slice(0,10)},
+			}
+		},
 		myfocus: function (){
 			Polymer.dom(this.root).querySelector('x-input').myfocus();
 		},
-		/*
+		
 		valueChanged: function (){
 			console.log('changing data');
 			//this.value=;
 		}
-		*/
+		
 	});
 	</script>
 </dom-module>

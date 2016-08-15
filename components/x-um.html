@@ -8,6 +8,12 @@
 	<script>
 	Polymer({
 		is:'x-um', 
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		myfocus: function (){
 			Polymer.dom(this.root).querySelector('x-input').myfocus();

@@ -7,7 +7,13 @@
 	</template>
 	<script>
 	Polymer({
-		is:'x-vettoreragionesociale', 
+		is:'x-vettoreragionesociale',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		myfocus: function (){
 			Polymer.dom(this.root).querySelector('x-input').myfocus();

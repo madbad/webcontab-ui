@@ -1,4 +1,4 @@
-<dom-module id="x-query-window" attributes="params" extends="x-window" jsonList="" tabindex="0">
+<dom-module id="x-query-window"> <!-- tabindex="0"-->
 	<template>
 		<style>
 		@host:active{
@@ -47,6 +47,16 @@
 	<script>
 	Polymer({
 		is:'x-query-window',
+		properties: {
+			params: {
+				type: String,
+				notify: true
+			},
+			jsonList: {
+				type: String,
+				notify: true
+			}
+		},
 		ready: function (){
 			$(this).keydown(function(event) {
 			//console.log(event.which);

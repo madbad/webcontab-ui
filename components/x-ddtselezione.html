@@ -1,4 +1,4 @@
-<dom-module id="x-ddtselezione" attributes="numero data fornitore causale">
+<dom-module id="x-ddtselezione">
 	<template>
 		<x-numero label="Numero"></x-numero>
 		<x-data></x-data>
@@ -10,9 +10,29 @@
 	<script>
 	Polymer({
 		is:'x-ddtselezione',
+		properties: {
+			numero: {
+				type: String,
+				notify: true
+			},
+			data: {
+				type: String,
+				notify: true
+			},
+			fornitore: {
+				type: String,
+				notify: true
+			},
+			causale: {
+				type: String,
+				notify: true
+			}
+		},
+		/*
 		numeroChanged: function (){
 			console.log('numero changed');
 		},
+		*/
 		ready: function () {
 			//manage keyboard events
 			$(this).keydown(function(event) {

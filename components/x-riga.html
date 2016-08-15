@@ -1,4 +1,4 @@
-<dom-module id="x-riga" attributes="value">
+<dom-module id="x-riga">
     <style>
 		@host{
 			* {
@@ -27,7 +27,13 @@
 	</template>
 	<script>
 	Polymer({
-		is:'x-riga', 
+		is:'x-riga',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		ready: function (){
 			this._type = {value:''};

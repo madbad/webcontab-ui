@@ -1,10 +1,16 @@
-<dom-module id="x-righe" attributes="value">
+<dom-module id="x-righe">
 	<template>
 		<!--<x-riga></x-riga>-->
 	</template>
 	<script>
 	Polymer({
 		is:'x-righe', 
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		valueChanged: function (){
 			//console.log(this.nodeName+' changed');

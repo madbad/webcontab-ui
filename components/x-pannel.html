@@ -1,4 +1,4 @@
-<dom-module id="x-pannel" attributes="title">
+<dom-module id="x-pannel">
 	<template>	
     <style>
    .hidden {
@@ -14,7 +14,13 @@
 	</template>
   <script>
     Polymer({
-	is:'x-pannel', 
+		is:'x-pannel',
+		properties: {
+			title: {
+				type: String,
+				notify: true
+			}
+		},
 		uiOnly: true,
 		ready: function() {
 

@@ -1,4 +1,4 @@
-<dom-module id="x-articolodescrizione" attributes="value lenght">
+<dom-module id="x-articolodescrizione">
 	<template>
 		<label>
 			Descr.
@@ -7,7 +7,17 @@
 	</template>
 	<script>
 	Polymer({
-		is:'x-articolodescrizione', 
+		is:'x-articolodescrizione',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			},
+			lenght: {
+				type: Number,
+				notify: true
+			}
+		},
 		value: '',
 		lenght: 15,
 		myfocus: function (){

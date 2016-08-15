@@ -1,4 +1,4 @@
-<dom-module id="x-window" attributes="title">
+<dom-module id="x-window">
 	<template>
 		<style>
 		.window {
@@ -31,7 +31,13 @@
 	</template>
 	<script>
 	Polymer({
-		is:'x-window', 
+		is:'x-window',
+		properties: {
+			title: {
+				type: String,
+				notify: true
+			}
+		},
 		uiOnly: true,
 		title: '',
 		close: function (){},

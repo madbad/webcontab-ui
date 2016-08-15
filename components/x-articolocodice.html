@@ -1,4 +1,4 @@
-<dom-module id="x-articolocodice" attributes="value">
+<dom-module id="x-articolocodice">
 	<template>
 		<label>
 			Art.
@@ -8,6 +8,12 @@
 	<script>
 	Polymer({
 		is:'x-articolocodice',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		ready: function (){
 			//manage keyboard events

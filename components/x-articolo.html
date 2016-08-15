@@ -1,4 +1,4 @@
-<dom-module id="x-articolo"  attributes="value">
+<dom-module id="x-articolo">
 	<template>
 		<x-articolocodice  value="{{value}}"></x-articolocodice>
 		<x-articolodescrizione></x-articolodescrizione>
@@ -6,6 +6,20 @@
 	<script>
 	Polymer({
 		is:'x-articolo',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			},
+			codice: {
+				type: String,
+				notify: true
+			},
+			descrizione: {
+				type: String,
+				notify: true
+			}
+		},
 		_type: 'articolo',
 		value: '',
 		ready: function (){

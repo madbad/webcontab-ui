@@ -1,11 +1,17 @@
-<dom-module id="x-imballaggio" attributes="value">
+<dom-module id="x-imballaggio">
 	<template>
 		<x-imballaggiocodice value="{{value}}"></x-imballaggiocodice>
 		<x-imballaggiodescrizione></x-imballaggiodescrizione>
 	</template>
 	<script>
 	Polymer({
-		is:'x-imballaggio', 
+		is:'x-imballaggio',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		myfocus: function (){
 			Polymer.dom(this.root).querySelector('x-imballaggiocodice').myfocus();

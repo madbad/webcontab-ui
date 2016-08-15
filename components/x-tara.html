@@ -1,10 +1,16 @@
-<dom-module id="x-tara" attributes="value">
+<dom-module id="x-tara">
 	<template>
 		<x-numero interi="5" decimali="1" label="Tara">{{value}}</x-numero>
 	</template>
 	<script>
 	Polymer({
-		is:'x-tara', 
+		is:'x-tara',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		myfocus: function (){
 			Polymer.dom(this.root).querySelector('x-numero').myfocus();

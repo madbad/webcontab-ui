@@ -1,4 +1,4 @@
-<dom-module id="x-input" attributes="value type maxlength size">
+<dom-module id="x-input">
 	<template>
     <style>
 		input:focus {
@@ -11,7 +11,25 @@
 	</template>
 	<script>
 	Polymer({
-		is:'x-input', 
+		is:'x-input',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			},
+			type: {
+				type: String,
+				notify: true
+			},
+			maxlength: {
+				type: Number,
+				notify: true
+			},
+			size: {
+				type: Number,
+				notify: true
+			},
+		},
 		
 		ready: function (){
 			Polymer.dom(this.root).querySelector('input').onfocus = function(){

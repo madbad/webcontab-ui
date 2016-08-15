@@ -1,4 +1,4 @@
-<dom-module id="x-articoloiva" attributes="value">
+<dom-module id="x-articoloiva">
 	<template>
 		<label>
 			Art.Iva
@@ -7,7 +7,13 @@
 	</template>
 	<script>
 	Polymer({
-		is:'x-articoloiva', 
+		is:'x-articoloiva',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		myfocus: function (){
 			Polymer.dom(this.root).querySelector('x-input').myfocus();

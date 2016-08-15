@@ -1,4 +1,4 @@
-<dom-module id="x-prezzo" attributes="value">
+<dom-module id="x-prezzo">
 	<template>
 		<label>
 			Prezzo
@@ -7,7 +7,13 @@
 	</template>
 	<script>
 	Polymer({
-		is:'x-prezzo', 
+		is:'x-prezzo',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		myfocus: function (){
 			Polymer.dom(this.root).querySelector('x-input').myfocus();

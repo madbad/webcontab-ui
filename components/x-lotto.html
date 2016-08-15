@@ -1,4 +1,4 @@
-<dom-module id="x-lotto" attributes="value">
+<dom-module id="x-lotto">
 	<template>
 		<label>
 			Lotto
@@ -7,7 +7,13 @@
 	</template>
 	<script>
 	Polymer({
-		is:'x-lotto', 
+		is:'x-lotto',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		myfocus: function (){
 			Polymer.dom(this.root).querySelector('x-input').myfocus();

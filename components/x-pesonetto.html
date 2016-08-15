@@ -4,7 +4,13 @@
 	</template>
 	<script>
 	Polymer({
-		is:'x-pesonetto', 
+		is:'x-pesonetto',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		myfocus: function (){
 			Polymer.dom(this.root).querySelector('x-numero').myfocus();

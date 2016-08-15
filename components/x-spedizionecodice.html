@@ -1,4 +1,4 @@
-<dom-module id="x-spedizionecodice" attributes="value">
+<dom-module id="x-spedizionecodice">
 	<template>
 		<label>
 			Spedizione
@@ -7,7 +7,13 @@
 	</template>
 	<script>
 	Polymer({
-		is:'x-spedizionecodice', 
+		is:'x-spedizionecodice',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		ready: function (){
 			//manage keyboard events

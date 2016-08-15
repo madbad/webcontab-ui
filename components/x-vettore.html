@@ -1,11 +1,17 @@
-<dom-module id="x-vettore" attributes="value">
+<dom-module id="x-vettore">
 	<template>
 		<x-vettorecodice value="{{value}}"></x-vettorecodice>
 		<x-vettoreragionesociale></x-vettoreragionesociale>
 	</template>
 	<script>
 	Polymer({
-		is:'x-vettore', 
+		is:'x-vettore',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		_type: 'vettore',
 		value: '',
 		ready: function (){

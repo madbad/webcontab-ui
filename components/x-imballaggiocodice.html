@@ -1,4 +1,4 @@
-<dom-module id="x-imballaggiocodice" attributes="value">
+<dom-module id="x-imballaggiocodice">
 	<template>
 		<label>
 			Imb.
@@ -7,7 +7,13 @@
 	</template>
 	<script>
 	Polymer({
-		is:'x-imballaggiocodice', 
+		is:'x-imballaggiocodice',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		myfocus: function (){
 			Polymer.dom(this.root).querySelector('x-input').myfocus();

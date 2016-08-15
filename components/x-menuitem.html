@@ -1,4 +1,4 @@
-<dom-module id="x-menuitem" attributes="action">
+<dom-module id="x-menuitem">
 	<template>
 		<style>
 		  .menuitem {
@@ -18,8 +18,14 @@
 	</template>
 	<script>
 	Polymer({
-	is:'x-menuitem', 
-	  action: ''
+		is:'x-menuitem',
+		properties: {
+			action: {
+				type: String,
+				notify: true
+			}
+		},
+		action: ''
 	});
 	</script>
 </dom-module>

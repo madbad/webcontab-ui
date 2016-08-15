@@ -1,22 +1,44 @@
-<dom-module id="x-numero" attributes="decimali interi totalecaratteri label value">
+<dom-module id="x-numero">
 	<template>
 	<label>
 		{{label}}
-		<x-input type="text" value="{{value}}" maxlength="{{totalecaratteri}}" size="{{totalecaratteri}}" style="width:{{totalecaratteri}}em"></x-input>
+		<x-input type="text" value="{{value}}"  maxlength="{{totalecaratteri}}" size="{{totalecaratteri}}" style="width:{{totalecaratteri}}em"></x-input>
 	</label>
 	</template>
 	<script>
 	Polymer({
-		is:'x-numero', 
-		decimali: 0,
-		interi: 8,
-		totalecaratteri:0,
-		label:'',
-		//value:'',
+		is:'x-numero',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			},
+			decimali: {
+				type: Number,
+				notify: true,
+				value:0
+			},
+			interi: {
+				type: Number,
+				notify: true,
+				value:8
+			},
+			totalecaratteri: {
+				type: Number,
+				notify: true,
+				value:1
+			},
+			label: {
+				type: String,
+				notify: true,
+				value:'',
+			},
+		},
 		ready: function (){
 			this.tabIndex = 0;
 			if(this.decimali>0){var virgola=1;}else{var virgola=0;}
 			this.totalecaratteri = this.interi+virgola+this.decimali;
+			console.log(this.totalecaratteri);
 		},
 		myfocus: function (){
 			setTimeout(function (){

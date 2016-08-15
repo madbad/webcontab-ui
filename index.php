@@ -121,8 +121,9 @@ console.log('tobefocused===>',focusable[this.focusedID]);
 		loadComponentsFromDir('components');
 		//loadComponentsFromDir('toolkit/components');
 	?>
-
+<!--
 <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+-->
 <style>
 input {
 	color:black;

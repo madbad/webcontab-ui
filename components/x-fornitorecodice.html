@@ -1,10 +1,16 @@
-<dom-module id="x-fornitorecodice" attributes="value">
+<dom-module id="x-fornitorecodice">
 	<template>
 		<x-input type="text" value="{{value}}"  maxlength="5" size="5"></x-input>
 	</template>
 	<script>
 	Polymer({
-		is:'x-fornitorecodice', 
+		is:'x-fornitorecodice',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		ready: function (){
 			//manage keyboard events

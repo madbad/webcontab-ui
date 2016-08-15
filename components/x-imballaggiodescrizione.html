@@ -1,4 +1,4 @@
-<dom-module id="x-imballaggiodescrizione" attributes="value">
+<dom-module id="x-imballaggiodescrizione">
 	<template>
 		<label>
 			Descr.
@@ -7,7 +7,13 @@
 	</template>
 	<script>
 	Polymer({
-		is:'x-imballaggiodescrizione', 
+		is:'x-imballaggiodescrizione',
+		properties: {
+			value: {
+				type: String,
+				notify: true
+			}
+		},
 		value: '',
 		myfocus: function (){
 			Polymer.dom(this.root).querySelector('x-input').myfocus();
