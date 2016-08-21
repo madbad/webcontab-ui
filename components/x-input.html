@@ -6,8 +6,13 @@
 			outline: none;
 			box-shadow: 0 0 10px orange;
 		}
+		input:disabled {
+			background: #dddddd;
+			/*color:#333333;*/
+			color:#595959;
+		}
 	</style>
-		<input id="input" type="{{type}}" value="{{value}}" maxlength="{{maxlength}}" size="{{size}}">
+		<input id="input" type="{{type}}" value="{{value}}" maxlength="{{maxlength}}" size="{{size}}" disabled="{{disabled}}">
 	</template>
 	<script>
 	Polymer({
@@ -29,6 +34,10 @@
 				type: Number,
 				notify: true
 			},
+			disabled: {
+				type: Boolean,
+				notify: true,
+			}
 		},
 		
 		ready: function (){

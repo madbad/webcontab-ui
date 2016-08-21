@@ -8,20 +8,20 @@
     </style>
 	<template>
 		<div class="riga">
-			<x-numero interi="4" label="N."></x-numero>
+			<x-numero interi="4" label="N." disabled="{{disabled}}"></x-numero>
 			
-			<x-articolo></x-articolo>
+			<x-articolo disabled="{{disabled}}"></x-articolo>
 
-			<x-um></x-um>
-			<x-pesolordo></x-pesolordo>
-			<x-tara></x-tara>
-			<x-pesonetto></x-pesonetto>
+			<x-um disabled="{{disabled}}"></x-um>
+			<x-pesolordo disabled="{{disabled}}"></x-pesolordo>
+			<x-tara disabled="{{disabled}}"></x-tara>
+			<x-pesonetto disabled="{{disabled}}"></x-pesonetto>
 			<br>
-			<x-prezzo></x-prezzo>
-			<x-articoloiva></x-articoloiva>
-			<x-colli></x-colli>
-			<x-imballaggio></x-imballaggio>
-			<x-lotto></x-lotto>
+			<x-prezzo disabled="{{disabled}}"></x-prezzo>
+			<x-articoloiva disabled="{{disabled}}"></x-articoloiva>
+			<x-colli disabled="{{disabled}}"></x-colli>
+			<x-imballaggio disabled="{{disabled}}"></x-imballaggio>
+			<x-lotto disabled="{{disabled}}"></x-lotto>
 			<hr>
 		</div>
 	</template>
@@ -31,7 +31,12 @@
 		properties: {
 			value: {
 				type: String,
-				notify: true
+				notify: true,
+				observer:'valueChanged'
+			},
+			disabled: {
+				type: Boolean,
+				notify: true,
 			}
 		},
 		value: '',

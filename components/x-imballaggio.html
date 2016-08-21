@@ -1,7 +1,7 @@
 <dom-module id="x-imballaggio">
 	<template>
-		<x-imballaggiocodice value="{{value}}"></x-imballaggiocodice>
-		<x-imballaggiodescrizione></x-imballaggiodescrizione>
+		<x-imballaggiocodice value="{{value}}" disabled="{{disabled}}"></x-imballaggiocodice>
+		<x-imballaggiodescrizione disabled="{{disabled}}"></x-imballaggiodescrizione>
 	</template>
 	<script>
 	Polymer({
@@ -10,12 +10,28 @@
 			value: {
 				type: String,
 				notify: true
+			},
+			disabled: {
+				type: Boolean,
+				notify: true,
 			}
 		},
-		value: '',
+		ready:function(){
+			/*focus management*/
+			this.focusAbleContainer = this.root.host;
+		},
+		
 		myfocus: function (){
 			Polymer.dom(this.root).querySelector('x-imballaggiocodice').myfocus();
-		}
+		},
+		
+		/*focus management*/
+		/*
+		focusedID: -1,
+		myfocus: myfocus,
+		focusNext: focusNext,
+		getFocusAble : getFocusAble,
+		*/
 	});
 	</script>
 </dom-module>

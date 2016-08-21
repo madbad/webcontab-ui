@@ -2,7 +2,7 @@
 	<template>
 	<label>
 		{{label}}
-		<x-input type="text" value="{{value}}"  maxlength="{{totalecaratteri}}" size="{{totalecaratteri}}" style="width:{{totalecaratteri}}em"></x-input>
+		<x-input type="text" value="{{value}}"  maxlength="{{totalecaratteri}}" size="{{totalecaratteri}}" style="width:{{totalecaratteri}}em" disabled="{{disabled}}"></x-input>
 	</label>
 	</template>
 	<script>
@@ -33,6 +33,10 @@
 				notify: true,
 				value:'',
 			},
+			disabled: {
+				type: Boolean,
+				notify: true,
+			}
 		},
 		ready: function (){
 			this.tabIndex = 0;

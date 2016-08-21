@@ -9,9 +9,9 @@
 							<br><x-vettore></x-vettore>
 						</x-pannel>
 						<x-pannel title="Dettaglio">
-							<x-righe>ppppp</x-righe>
+							<x-righe></x-righe>
 							<hr>
-							<x-riga>sadasd</x-riga>
+							<x-riga></x-riga>
 						</x-pannel>
 						<x-pannel title="Stampa">
 							- Stampiamo il documento
@@ -40,13 +40,15 @@
 			context: this,
 		}).done(function( msg ) {
 			var ddt = $.parseJSON(msg).ddt;
-
+//console.log(ddt);
 			for (var prop in ddt){
+//console.log(prop,ddt[prop]);
 				if (!prop.search('cod_') && typeof ddt[prop] == 'object'){
 					this[prop].value = ddt[prop].codice;
 				}else{
 					this[prop].value = ddt[prop];
 				}
+//console.log(typeof this[prop].onchange);
 				
 				//call the onchange method because it is not fired when we modify the value from here
 				if(typeof this[prop].onchange == 'function') {

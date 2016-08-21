@@ -2,7 +2,7 @@
 	<template>
 		<label>
 			UM
-			<x-input type="text" value="{{value}}"  maxlength="2" size="2"></x-input>
+			<x-input type="text" value="{{value}}"  maxlength="2" size="2" disabled="{{disabled}}"></x-input>
 		</label>
 	</template>
 	<script>
@@ -12,6 +12,10 @@
 			value: {
 				type: String,
 				notify: true
+			},
+			disabled: {
+				type: Boolean,
+				notify: true,
 			}
 		},
 		value: '',

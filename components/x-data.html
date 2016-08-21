@@ -13,6 +13,7 @@
 				type: String,
 				notify: true,
 				value: function(){return new Date().toJSON().slice(0,10)},
+				observer:'valueChanged'
 			}
 		},
 		myfocus: function (){

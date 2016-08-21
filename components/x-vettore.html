@@ -24,7 +24,7 @@
 			//perchè se operassi direttamente nel metodo onchange dell'input 
 			//perdo i riferimenti ad alcune proprietà di x-fornitore che mi servono
 			this.codice.onchange = function (){
-				console.log('the input has changed');		
+				console.log('the input has changed');
 				//call the x-fornitore oncodechange function  
 				this.oncodechange();
 			}.bind(this);
@@ -61,7 +61,7 @@
 				}
 			});
 			/*focus management*/
-			this.focusAbleContainer = this.root;
+			this.focusAbleContainer = this.root.host;
 		},
 		/*focus management*/
 		focusedID: -1,

@@ -1,42 +1,52 @@
 <dom-module id="x-tabs">
 	<template>
 		<style>
-		  .labels{
-			border: 0;
-			border-bottom: 1px solid #ccc;
-		  }
-		  .labels > div{
-			display: inline-block;
-			border: 1px solid #ccc;
-			padding-left:0.3em;
-			padding-right:0.3em;
-			border-top-left-radius: 0.4em;
-			border-top-right-radius: 0.4em;
-			background-color: #e1e1e1;
-			border-bottom:0px;
-		   }
-
-	   .labels > div:hover {
-			background-color: white;
-			border-color: #000000;
-		  }
-	   .labels > .selected {
-			background-color: white;
-			color: #555;
-		  }
-
-	   .hidden {
-			width: 0px;
-			height: 0px;
-			visibility:hidden;
-			display:none;
-			overflow:hidden;
-		}
+			:host {
+				color:red;
+			}
+			#teest{
+			color:yellow;
+			}
+			#teest > .blue{
+			color:blue;
+			}
+			#labels{
+				border: 0px;
+				border-bottom: 1px solid #ccc;
+			}
+			#labels > div{
+				display: inline-block;
+				border: 1px solid #ccc;
+				padding-left:0.3em;
+				padding-right:0.3em;
+				border-top-left-radius: 0.4em;
+				border-top-right-radius: 0.4em;
+				background-color: #e1e1e1;
+				border-bottom:0px;
+			}
+			#labels > div:hover {
+				background-color: white;
+				border-color: #000000;
+			}
+			#labels > .selected {
+				background-color: white;
+				color: #555;
+			}
+			#pannels ::content > .hidden {
+				width: 0px;
+				height: 0px;
+				visibility:hidden;
+				display:none;
+				overflow:hidden;
+			}
 		</style>
+
+		<div id="labels">
+		<div></div><div></div><div></div>
 		
-		<div class="labels" id="labels"></div>
-		<div class="pannels" id="pannels">
-			<content></content>
+		</div>
+		<div id="pannels">
+			<content id="myContent"></content>
 		</div>
 	</template>
 	<script>
@@ -48,25 +58,31 @@
 			//dont' ask me why but if I do not put it into a settimeout block it says it has 0 childrens... that is not true
 			//even if i call it in 0 milliseconds seconds
 			setTimeout(function () {
-
+			
+console.log("TABS CREATION");
+console.log(this);
 				//for each tab pannel
-				for (var tabid=0; tabid < this.children.length; tabid++){
+				var content = this.getContentChildren('#myContent')
+console.log(content.length);
+console.log(content);
+				for (var tabid=0; tabid < content.length; tabid++){
 
 					//the title of the tabcontent
-					var id = this.children[tabid].title;
-					
+console.log(content[tabid]);
+					var id = content[tabid].title;
+					var id = content[tabid].getAttribute('title');
+console.log(id);
 					//setup the tab-label
 					var newLabel = document.createElement('div');
 					newLabel.innerHTML = id; 
-					newLabel.title = id;
+					newLabel.setAttribute('title',id);
 					newLabel.onclick = this.select.bind(this);
-					
+console.log(newLabel);
 					//add the tab-label to the dom
-					this.$.labels.appendChild(newLabel);
+					Polymer.dom(this.$.labels).appendChild(newLabel);
 					
 					//each panel when lose the focus show a menu
-					
-					this.children[tabid].onleaving = function (){
+					content[tabid].onleaving = function (){
 						var menu = document.createElement('x-query-window');
 						menu.jsonList =$.parseJSON('[{"menu":"Testata"},{"menu":"Dettaglio"},{"menu":"Stampa"}]');
 						menu.jsonToTable(menu.jsonList);
@@ -83,15 +99,16 @@
 					
 					//on the start i show only the firs tab
 					if(tabid==0){
-					console.log(this.children);
-					console.log(this.children[tabid]);
-//						this.children[tabid].show();
+					console.log(content);
+					console.log(content[tabid]);
+//						content[tabid].show();
 						this.$.labels.children[tabid].className='selected';
 					}else{
-//						this.children[tabid].hide();
+//						content[tabid].hide();
 						this.$.labels.children[tabid].className='';
 					}
 				}
+//				this.updateStyles();
 			}.bind(this), 5);
 			
 			/*focus management*/
@@ -108,8 +125,8 @@
 			var tabTitle=label;
 			
 			//show the content
-			for (var tabid=0; tabid < this.children.length; tabid++){
-				var curTabPanel = this.children[tabid];
+			for (var tabid=0; tabid < content.length; tabid++){
+				var curTabPanel = content[tabid];
 				var curTabLabel = this.$.labels.children[tabid];
 				
 				if(tabTitle == curTabPanel.title){

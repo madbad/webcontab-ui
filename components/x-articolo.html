@@ -1,7 +1,7 @@
 <dom-module id="x-articolo">
 	<template>
-		<x-articolocodice  value="{{value}}"></x-articolocodice>
-		<x-articolodescrizione></x-articolodescrizione>
+		<x-articolocodice value="{{value}}" disabled="{{disabled}}"></x-articolocodice>
+		<x-articolodescrizione disabled="{{disabled}}"></x-articolodescrizione>
 	</template>
 	<script>
 	Polymer({
@@ -18,7 +18,12 @@
 			descrizione: {
 				type: String,
 				notify: true
+			},
+			disabled: {
+				type: Boolean,
+				notify: true,
 			}
+
 		},
 		_type: 'articolo',
 		value: '',
@@ -45,8 +50,8 @@
 					url: "./../webContab/my/php/core/do.php",
 					data: { action: 'getOne',
 							params: {
-										_type: this._type,
-										codice: this.codice.value,
+								_type: this._type,
+								codice: this.codice.value,
 							},
 					},
 					context: this,
@@ -72,7 +77,7 @@
 				}
 			});
 			/*focus management*/
-			this.focusAbleContainer = this.root;
+			this.focusAbleContainer = this.root.host;
 		},
 		/*focus management*/
 		focusedID: -1,

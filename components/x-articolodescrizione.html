@@ -2,7 +2,7 @@
 	<template>
 		<label>
 			Descr.
-			<x-input type="text" value="{{value}}"  maxlength="{{lenght}}" size="{{lenght}}"></x-input>
+			<x-input type="text" value="{{value}}"  maxlength="{{lenght}}" size="{{lenght}}" disabled="{{disabled}}"></x-input>
 		</label>
 	</template>
 	<script>
@@ -16,6 +16,10 @@
 			lenght: {
 				type: Number,
 				notify: true
+			},
+			disabled: {
+				type: Boolean,
+				notify: true,
 			}
 		},
 		value: '',

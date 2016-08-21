@@ -2,7 +2,7 @@
 	<template>
 		<label>
 			Lotto
-			<x-input type="text" value="{{value}}"></x-input>
+			<x-input type="text" value="{{value}}" disabled="{{disabled}}"></x-input>
 		</label>
 	</template>
 	<script>
@@ -12,6 +12,10 @@
 			value: {
 				type: String,
 				notify: true
+			},
+			disabled: {
+				type: Boolean,
+				notify: true,
 			}
 		},
 		value: '',

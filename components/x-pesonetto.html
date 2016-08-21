@@ -1,6 +1,6 @@
 <dom-module id="x-pesonetto">
 	<template>
-		<x-numero interi="6" decimali="2" label="P.Netto">{{value}}</x-numero>
+		<x-numero interi="6" decimali="2" label="P.Netto" disabled="{{disabled}}">{{value}}</x-numero>
 	</template>
 	<script>
 	Polymer({
@@ -9,6 +9,10 @@
 			value: {
 				type: String,
 				notify: true
+			},
+			disabled: {
+				type: Boolean,
+				notify: true,
 			}
 		},
 		value: '',

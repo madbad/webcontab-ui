@@ -1,6 +1,6 @@
 <dom-module id="x-tara">
 	<template>
-		<x-numero interi="5" decimali="1" label="Tara">{{value}}</x-numero>
+		<x-numero interi="5" decimali="1" label="Tara" disabled="{{disabled}}">{{value}}</x-numero>
 	</template>
 	<script>
 	Polymer({
@@ -9,6 +9,10 @@
 			value: {
 				type: String,
 				notify: true
+			},
+			disabled: {
+				type: Boolean,
+				notify: true,
 			}
 		},
 		value: '',

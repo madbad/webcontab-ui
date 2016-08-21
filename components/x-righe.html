@@ -8,7 +8,8 @@
 		properties: {
 			value: {
 				type: String,
-				notify: true
+				notify: true,
+				observer:'valueChanged'
 			}
 		},
 		value: '',
@@ -21,8 +22,10 @@
 			for (var i =0; i < righe.length; i++){
 				var riga = righe[i];
 				var newRiga = document.createElement('x-riga');
+				console.log(newRiga);
 				Polymer.dom(this.root).appendChild(newRiga);
 				newRiga.value = riga;
+				newRiga.setAttribute('disabled', true);
 			}
 		}
 	});

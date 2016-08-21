@@ -2,7 +2,7 @@
 	<template>
 		<label>
 			Colli
-			<x-input type="text" value="{{value}}" maxlength="5" size="5"></x-input>
+			<x-input type="text" value="{{value}}" maxlength="5" size="5" disabled="{{disabled}}"></x-input>
 		</label>
 	</template>
 	<script>
@@ -12,6 +12,10 @@
 			value: {
 				type: String,
 				notify: true
+			},
+			disabled: {
+				type: Boolean,
+				notify: true,
 			}
 		},
 		value: '',

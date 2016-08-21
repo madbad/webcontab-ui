@@ -71,8 +71,12 @@ console.log('tobefocused===>',focusable[this.focusedID]);
 			}
 		};
 		var getFocusAble = function (){
+		console.log('getting focusables for', this);
+		console.log('should find them in', this.focusAbleContainer);
 			var element = this.focusAbleContainer;
+		console.log('they are', element.children);
 			var childrens = filter(element.children);
+		console.log('filtered', childrens);
 			return childrens;
 		}
 
